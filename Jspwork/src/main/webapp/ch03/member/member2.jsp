@@ -8,7 +8,7 @@
 </head>
 <body>
 	<jsp:useBean id = "member" class = "beans.MemberBean" />
-	<!-- name의 값이 객체 이름과 같음 -->
+	<!-- name의 값이 객체 이름과 같음 --><!-- xml 방식 -->
 	<jsp:setProperty property="id" name="member" />
 	<jsp:setProperty property="name" name="member" />
 	

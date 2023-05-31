@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	// 아이디를 한글로 적었을 경우 아이디가 깨짐 - 그걸 막기 위해 인코딩
+	request.setCharacterEncoding("utf-8");
+
 	// 폼에 입력된 데이터 가져오기
 	String uid = request.getParameter("userid");
 	String pwd = request.getParameter("passwd");
