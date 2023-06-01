@@ -11,8 +11,8 @@
 	<div id="container">
 		<h2>계산기</h2>
 		<hr>
-		<!-- <form action="/calculator/calc" method="post"> -->
-		<form action="/calculator/calc" method="get">
+		<!-- service를 통해 메소드에 영향받지 않음 -->
+		<form action="/calculator/calc2" method="get">
 			<input type="text" name="num1">
 			<select name="op">
 				<option>+</option>

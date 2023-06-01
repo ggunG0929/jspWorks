@@ -20,6 +20,9 @@
 		// 날짜와 시간 형식 설정
 		DateTimeFormatter datetime = DateTimeFormatter.ofPattern("yyyy-MM-dd a hh:mm:ss");
 		String current_time = now.format(datetime);
+		
+		// 5초마다 새로고침
+		response.setIntHeader("Refresh", 5);
 	%>
 	<h3>현재 날짜와 시간은 <%= current_time %></h3>
 </body>
