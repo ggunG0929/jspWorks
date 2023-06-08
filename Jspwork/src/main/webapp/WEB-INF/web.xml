@@ -9,7 +9,8 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list> -->
-	<servlet>
+  
+<!-- 	<servlet>
 		<servlet-name>first</servlet-name>
 		<servlet-class>servlet.FirstServlet</servlet-class>
 	</servlet>
@@ -25,6 +26,15 @@
 	<servlet-mapping>
 		<servlet-name>second</servlet-name>
 		<url-pattern>/second</url-pattern>
+	</servlet-mapping> -->
+	
+	<servlet>
+		<servlet-name>calc</servlet-name>
+		<servlet-class>mvc.MVCTest2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>calc</servlet-name>
+		<url-pattern>/mvc/mvc02</url-pattern>
 	</servlet-mapping>
 
 </web-app>
