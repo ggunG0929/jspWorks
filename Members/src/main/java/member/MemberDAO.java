@@ -1,0 +1,67 @@
+package member;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.JDBCUtil;
+
+public class MemberDAO {
+	
+	// 필드
+	private Connection conn = null;			// import
+	private PreparedStatement pstmt = null;	// import
+	private ResultSet rs = null;			// import
+	
+	// 회원 가입
+	public void addMember(Member member) {
+		conn = JDBCUtil.getConnection();
+		String sql = "INSERT INTO t_member (memberid, passwd, name, gender) VALUES (?, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1,  member.getMemberId());
+			pstmt.setString(2,  member.getPasswd());
+			pstmt.setString(3,  member.getName());
+			pstmt.setString(4,  member.getGender());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
+	
+	
+	
+	
+	// 회원목록
+	public ArrayList<Member> getMemberList(){	// import
+		ArrayList<Member> memberList = new ArrayList<>();
+		conn = JDBCUtil.getConnection();
+		String sql = "SELECT * FROM t_member ORDER BY joindate DESC";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Member member = new Member();	// db에서 꺼내옴
+				member.setMemberId(rs.getString("memberid"));
+				member.setPasswd(rs.getString("passwd"));
+				member.setName(rs.getString("name"));
+				member.setGender(rs.getString("gender"));
+				member.setJoinDate(rs.getDate("joindate"));
+				
+				memberList.add(member);			// 리스트에 저장
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		
+		return memberList;
+	}
+
+}

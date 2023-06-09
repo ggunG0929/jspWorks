@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* 공통 스타일 */
+*{margin: 0 auto; padding: 0;}
+#container{width: 90%; margin: 50px auto;}
+a{text-decoration: none;}
+ul li{list-style: none;}
+
+/* index 스타일 */
+h2{text-align: center;}
+#main{margin: 20px auto; text-align: center;}
+#main .main_img{margin: 20px auto;}
+#main .main_img img{border-radius: 10px;}
+
+/* memberList 스타일 */
+#memberlist{width: 550px; margin: 40px auto;}
+#memberlist table{width: 550px; margin: 30px auto;}
+#memberlist table, th, td{border: 1px solid #ccc; border-collapse: collapse; text-align: center;}
+#memberlist table th, td{padding: 10px 0; font-size: 0.9em;}
+#memberlist table thead{background: #eee;}
+
+/* register 스타일 */
+#register{width: 400px; margin: 30px auto;}
+#register form{margin: 30px auto;}
+#register form fieldset{padding-bottom: 20px;}
+#register form ul li{margin: 30px 20px;}
+#register form label{width: 120px; float: left; padding-left: 10px; margin-right: 10px;}
+#register form input[type='password'], input[type='text']{width: 210px; height: 25px;}
+#register form li label.radio{width: 50px;}
+#register form .button{width: 400px; height: 50px; text-align: center;}
+#register form input[type='submit'], input[type='reset']{width: 80px; height: 30px; margin-top: 30px;}
