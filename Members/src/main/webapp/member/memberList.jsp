@@ -10,6 +10,13 @@
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
+	<c:if test="${empty sessionId }">
+		<script type="text/javascript">
+			alert('로그인이 필요합니다')
+			location.href = "/loginForm.do"
+		</script>
+	</c:if>
+	<jsp:include page="../header.jsp"/>
 	<div id="container">
 		<section id="memberlist">
 		<h2>회원 목록</h2>
@@ -30,11 +37,14 @@
 			<tbody>
 				<c:forEach var="member" items="${memberList }">
 				<tr>
-					<td><c:out value="${member.memberId }"></c:out></td>
+					<td>
+						<a href = "/memberView.do?memberId=${member.memberId }">
+							<c:out value="${member.memberId }"></c:out>
+						</a>
+					</td>
 					<td><c:out value="${member.passwd }"></c:out></td>
 					<td><c:out value="${member.name }"></c:out></td>
 					<td><c:out value="${member.gender }"></c:out></td>
-<%-- 					<td><c:out value="${member.joinDate }"></c:out></td> --%>
 					<td><fmt:formatDate value="${member.joinDate }" pattern = "yyyy-MM-dd hh:mm:ss"/></td>
 				</tr>
 				</c:forEach>
@@ -42,5 +52,6 @@
 		</table>
 		</section>
 	</div>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -19,13 +19,12 @@ public class MemberDAO {
 	public void addMember(Member member) {
 		conn = JDBCUtil.getConnection();
 		String sql = "INSERT INTO t_member (memberid, passwd, name, gender) VALUES (?, ?, ?, ?)";
-		
 		try {
 			pstmt = conn.prepareStatement(sql);		// surround with try catch
-			pstmt.setString(1,  member.getMemberId());
-			pstmt.setString(2,  member.getPasswd());
-			pstmt.setString(3,  member.getName());
-			pstmt.setString(4,  member.getGender());
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPasswd());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getGender());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -33,9 +32,6 @@ public class MemberDAO {
 			JDBCUtil.close(conn, pstmt);
 		}
 	}
-	
-	
-	
 	
 	// 회원목록
 	public ArrayList<Member> getMemberList(){	// import
@@ -52,7 +48,6 @@ public class MemberDAO {
 				member.setName(rs.getString("name"));
 				member.setGender(rs.getString("gender"));
 				member.setJoinDate(rs.getDate("joindate"));
-				
 				memberList.add(member);			// 리스트에 저장
 			}
 		} catch (SQLException e) {
@@ -60,8 +55,51 @@ public class MemberDAO {
 		} finally {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
-		
 		return memberList;
+	}
+	
+	// 회원 상세 보기(정보)
+	public Member getMember(String memberId) {
+		Member member = new Member();
+		conn = JDBCUtil.getConnection();
+		String sql = "SELECT * FROM t_member WHERE memberid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member.setMemberId(rs.getString("memberid"));
+				member.setPasswd(rs.getString("passwd"));
+				member.setName(rs.getString("name"));
+				member.setGender(rs.getString("gender"));
+				member.setJoinDate(rs.getDate("joindate"));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return member;
+	}
+	
+	// 로그인 체크
+	public boolean checkLogin(Member member) {
+		conn = JDBCUtil.getConnection();
+		String sql = "SELECT * FROM t_member WHERE memberid = ? AND passwd = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);	// try catch
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPasswd());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+					return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return false;
 	}
 
 }
