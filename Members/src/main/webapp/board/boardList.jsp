@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 목록</title>
+<title>게시판 목록</title>
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 </head>
 <body>
@@ -28,8 +28,8 @@
 					<c:forEach var="board" items="${boardList }">
 					<tr>
 						<td><c:out value="${board.bnum }"></c:out></td>
-						<td><c:out value="${board.title }"></c:out></td>
-						<td><fmt:formatDate value="${board.regDate }" pattern = "yyyy-MM-dd hh:mm:ss a"/></td>
+						<td><a href="/boardView.do?bnum=${board.bnum }"><c:out value="${board.title }"/></a></td>
+						<td><fmt:formatDate value="${board.regDate }" pattern = "yyyy-MM-dd HH:mm:ss"/></td>
 						<td><c:out value="${board.hit }"></c:out></td>
 						<td><c:out value="${board.memberId }"></c:out></td>
 					</tr>
@@ -37,7 +37,7 @@
 				</tbody>
 			</table>
 			<div class="btnWrite">
-				<a href="/boardFrom.do">
+				<a href="/boardForm.do">
 					<button type="button">글쓰기</button>
 				</a>
 			</div>

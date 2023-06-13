@@ -101,5 +101,20 @@ public class MemberDAO {
 		}
 		return false;
 	}
+	
+	// 회원 삭제
+	public void deleteMember(String memberId) {
+		conn = JDBCUtil.getConnection();
+		String sql = "DELETE FROM t_member WHERE memberId = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1, memberId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 
 }

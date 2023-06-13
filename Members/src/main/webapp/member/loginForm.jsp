@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그인</title>
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
 	<div id="container">
 		<section id="login">
-			<h2 style="margin-top: 5px;">로그인</h2>
+			<h2>로그인</h2>
 			<form action="/loginProcess.do" method="post">
 				<fieldset>
 					<ul>
