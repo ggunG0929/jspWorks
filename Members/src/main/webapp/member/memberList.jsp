@@ -56,6 +56,10 @@
 				</tbody>
 			</table>
 		</section>
+		<section id="eventlink">
+			<h3>이벤트 추첨 링크</h3>
+			<a href="/memberEvent.do"><img src="../resources/images/bronx.png"></a>
+		</section>
 	</div>
 	<jsp:include page="../footer.jsp"/>
 </body>

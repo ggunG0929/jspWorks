@@ -159,6 +159,26 @@ public class MainController extends HttpServlet {
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			boardDAO.deleteBoard(bnum);
 			nextPage = "/boardList.do";		// 삭제 후 게시글 목록으로 이동	// jsp로 하면 글이 없는 목록이 뜸
+		}else if(command.equals("/updateBoard.do")) {
+			int bnum = Integer.parseInt(request.getParameter("bnum"));
+			Board board = boardDAO.getBoard(bnum);	// 게시글 상세보기
+			request.setAttribute("board", board);
+			nextPage = "/board/updateBoard.jsp";
+		}else if(command.equals("/updateProcess.do")) {
+			// 수정 폼에서 입력 내용 받기
+			int bnum = Integer.parseInt(request.getParameter("bnum"));
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			
+			Board updateBoard = new Board();
+			updateBoard.setTitle(title);
+			updateBoard.setContent(content);
+			updateBoard.setBnum(bnum);
+			
+			boardDAO.updateBoard(updateBoard);	// 수정 처리
+			nextPage = "/boardList.do";
+		} else if(command.equals("/memberEvent.do")) { 
+			nextPage = "/member/memberEvent.jsp";
 		}
 		
 		// 포워딩 - 새로고침 자동 저장 오류 해결

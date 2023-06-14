@@ -38,6 +38,8 @@ footer{height: 80px; border-top: 2px solid #222;}
 #memberlist table th, td{padding: 10px 0; font-size: 0.9em;}
 #memberlist table thead{background: #eee;}
 #memberlist table td:nth-of-child(6){width: 60px;}
+#eventlink{width: 550px; margin: 20px auto; text-align: center;}
+#eventlink h3{padding: 10px; margin: 5px; text-align: center;}
 
 /* register 스타일 */
 #register{width: 450px; margin: 30px auto;}
@@ -70,6 +72,12 @@ footer{height: 80px; border-top: 2px solid #222;}
 #login form input[type="text"], input[type="password"]{width: 210px; padding: 5px;}
 #login form input[type="submit"]{padding: 10px 15px; margin-top: 10px;}
 
+/* memberEvent 스타일 */
+#memberevent{width: 80%; margin: 40px auto 100px; text-align: center}
+#memberevent .banner{margin: 30px auto;}
+#memberevent button{padding: 10px 20px; font-size: 1em;}
+#memberevent #display{width: 320px; height: 100px; margin: 20px auto; border: 1px solid #ccc; padding-top: 60px; letter-spacing: 1px; background: yellow;}
+
 /* boardList 스타일 */
 #boardlist{width: 650px; margin: 40px auto 200px;}
 #boardlist table{width: 650px; margin: 30px auto;}
@@ -96,3 +104,12 @@ footer{height: 80px; border-top: 2px solid #222;}
 #board_detail table tr:nth-of-type(3) td{text-align: left; padding-left: 10px;}
 #board_detail table textarea{width: 520px; height: 350px; resize: none; padding: 5px; line-height: 1.5; font-family: '맑은고딕'}
 #board_detail table button[type='button']{width: 80px; height: 30px;}
+
+/* board_update 스타일 */
+#board_update{width: 550px; margin: 40px auto 100px;}
+#board_update table{width: 550px; margin: 30px auto; border-collapse: collapse;}
+#board_update table input[type='text']{width: 520px; height: 25px; padding: 5px;}
+#board_update table tr:nth-of-type(3) td{text-align: left; padding-left: 10px;}
+#board_update table tr:nth-of-type(4) td{text-align: left; padding-left: 10px;}
+#board_update table textarea{width: 520px; height: 350px; resize: none; padding: 5px; line-height: 1.5; font-family: '맑은고딕'}
+#board_update table button[type='button']{width: 80px; height: 30px;}
