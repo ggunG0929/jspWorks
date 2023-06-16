@@ -45,12 +45,13 @@ public class BoardDAO {
 	// 게시글 쓰기
 	public void addBoard(Board board) {
 		conn = JDBCUtil.getConnection();
-		String sql = "INSERT INTO t_board(bnum, title, content, memberid) VALUES (b_seq.NEXTVAL, ?, ?, ?)";
+		String sql = "INSERT INTO t_board(bnum, title, content, memberid, fileupload) VALUES (b_seq.NEXTVAL, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);		// surround with try catch
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContent());
 			pstmt.setString(3, board.getMemberId());
+			pstmt.setString(4, board.getFileUpload());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

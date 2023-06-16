@@ -1,0 +1,4 @@
+깃허브토큰
+
+이클립스에서 깃허브연결시 필요
+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

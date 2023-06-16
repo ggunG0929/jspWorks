@@ -19,13 +19,18 @@
 	<div id="container">
 		<section id="board_reg">
 			<h2>글쓰기</h2>
-			<form action="/addBoard.do" method="post">
+			<form action="/addBoard.do" method="post" enctype="multipart/form-data">
 				<table>
 					<tr>
 						<td><input type="text" name="title" placeholder="글제목" required></td>
 					</tr>
 					<tr>
 						<td><textarea rows="8" cols="100" name="content" placeholder="글내용"></textarea></td>
+					</tr>
+					<tr>
+						<td>
+							<input type="file" name="filename">
+						</td>
 					</tr>
 					<tr>
 						<td>

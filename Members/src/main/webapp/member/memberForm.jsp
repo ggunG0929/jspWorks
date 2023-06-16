@@ -6,7 +6,32 @@
 <meta charset="UTF-8">
 <title>회원 가입</title>
 <link rel="stylesheet" href="resources/css/style.css">
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="resources/js/validation.js"></script>
+<script type="text/javascript">
+	function checkID() {
+		//alert("check");
+		let memberId = $('#memberId').val();
+		$.ajax({
+			type: "post",
+			url: "http://localhost:8080/checkid",
+			dataType: "text",
+			data: {id: memberId},	// 서블릿으로 id를 보냄
+			success: function(data) {
+				if($.trim(data) == 'usable') {
+					$('#check').text("사용가능한 ID입니다.")
+							   .css({'color': 'red', 'padding-top': '5px', 'margin-left': '150px'});
+				}else {
+					$('#check').text("이미 가입된 ID입니다.")
+					   		   .css({'color': 'red', 'padding-top': '5px', 'margin-left': '150px'});
+				}
+			},
+			error: function() {
+				alert("에러 발생!");
+			}
+		});	// jquery 필요
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -19,6 +44,8 @@
 						<li>
 							<label for="memberId">아이디 </label>
 							<input type="text" id="memberId" name="memberId" placeholder="4~15자까지 입력">
+							<button type="button" onclick="checkID()" class="btn_check">ID 중복</button>
+							<p id="check"></p>
 						</li>
 						<li>
 							<label for="passwd1">비밀번호 </label>

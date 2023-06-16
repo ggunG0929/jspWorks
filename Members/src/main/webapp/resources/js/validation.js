@@ -5,6 +5,7 @@ function checkMember() {
 	let pw1 = form.passwd1.value;
 	let pw2 = form.passwd2.value;
 	let name = form.name.value;
+	let check = document.getElementById("check").innerText;
 	
 	// 정규 표현식
 	let pw_pat1 = /[0-9]+/		// 숫자만
@@ -30,6 +31,10 @@ function checkMember() {
 	}else if(pw_pat1.test(name)||pw_pat3.test(name)) {
 		alert("이름에는 특수문자나 숫자를 포함하지 않습니다.");
 		form.name.focus();
+		return false;
+	}else if(check != "사용가능한 ID입니다.") {
+		alert("ID중복 체크가 필요합니다.");
+		form.memberId.select();
 		return false;
 	}else{
 		form.submit();

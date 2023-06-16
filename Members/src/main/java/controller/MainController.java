@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import board.Board;
 import board.BoardDAO;
@@ -134,19 +138,34 @@ public class MainController extends HttpServlet {
 		}else if(command.equals("/boardForm.do")) {		// 글 쓰기
 			nextPage = "/board/boardForm.jsp";			
 		}else if(command.equals("/addBoard.do")) {		// 글 올리기
-			// 글쓰기 폼에 입력된 데이터 받아오기
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
+			
+			String realFolder = "C:/Users/laptop/Desktop/coding/jspWorks/Members/src/main/webapp/upload";
+			MultipartRequest multi = new MultipartRequest(request, realFolder, 5*1024*1024, "utf-8", new DefaultFileRenamePolicy());
+			
+			// 글쓰기 폼에 입력된 데이터 받아오기(request는 사용하지 않고 multi를 사용함)
+			String title = multi.getParameter("title");
+			String content = multi.getParameter("content");
 			
 			// memberId 세션을 가져오기
 			String memberId = (String)session.getAttribute("sessionId");
-			Board board = new Board();
-			board.setTitle(title);
-			board.setContent(content);
-			board.setMemberId(memberId);
+			
+			// fileName 속성 가져오기
+			Enumeration<String> files = multi.getFileNames();
+			String name = "";
+			String fileName = "";
+			if(files.hasMoreElements()) {
+				name = (String)files.nextElement();
+				fileName = multi.getFilesystemName(name);	// 서버에 저장될 파일이름
+			}
+			
+			Board newBoard = new Board();
+			newBoard.setTitle(title);
+			newBoard.setContent(content);
+			newBoard.setMemberId(memberId);
+			newBoard.setFileUpload(fileName);
 			
 			// 글쓰기 처리 메서드 호출
-			boardDAO.addBoard(board);
+			boardDAO.addBoard(newBoard);	//db에 저장
 //			nextPage = "/boardList.do";		// 새로고침 시에도 이전에 올린 글이 또 올라가는 오류 생김->포워딩에 이프문 추가해서 처리
 		
 		}else if(command.equals("/boardView.do")) {		// 글 상세보기

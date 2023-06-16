@@ -14,6 +14,7 @@ public class Board implements Serializable {	// add serial	// import
 	private Timestamp modifyDate;
 	private int hit;
 	private String memberId;
+	private String fileUpload;
 	
 	// 우클>src>generate
 	public int getBnum() {
@@ -57,6 +58,12 @@ public class Board implements Serializable {	// add serial	// import
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+	public String getFileUpload() {
+		return fileUpload;
+	}
+	public void setFileUpload(String fileUpload) {
+		this.fileUpload = fileUpload;
 	}
 
 }
