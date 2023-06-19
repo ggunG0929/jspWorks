@@ -118,16 +118,20 @@ public class MemberDAO {
 	}
 	
 	// ID 중복 체크
-	public boolean duplicatedID(String memberId) {
-		boolean result = false;
+//	public boolean duplicatedID(String memberId) {
+	public int duplicatedID(String memberId) {
+//		boolean result = false;
+		int result = 0;
 		conn = JDBCUtil.getConnection();
-		String sql = "SELECT DECODE(COUNT(*), 1, 'true', 'false') AS result FROM t_member WHERE memberid = ?";
+//		String sql = "SELECT DECODE(COUNT(*), 1, 'true', 'false') AS result FROM t_member WHERE memberid = ?";
+		String sql = "SELECT COUNT(*) AS result FROM t_member WHERE memberid = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);		// surround with try catch
 			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				result = rs.getBoolean("result");	// 칼럼이 result인 값을 꺼내옴
+//				result = rs.getBoolean("result");	// 칼럼이 result인 값을 꺼내옴
+				result = rs.getInt("result");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
