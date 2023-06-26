@@ -131,15 +131,40 @@ public class MainController extends HttpServlet {
 		
 		// 게시판 관리
 		if(command.equals("/boardList.do")) {			// 게시글 목록
-			ArrayList<Board> boardList = boardDAO.getBoardList();
+			// 페이지 처리
+			String pageNum = request.getParameter("pageNum");
+			if(pageNum == null) {	// pageNum이 없으면 1페이지로
+				pageNum = "1";
+			}
+			// 각 페이지의 첫 행: 1page->1~, 2page->11~, 3page->21~
+			int currentPage = Integer.parseInt(pageNum);
+			int pageSize = 10;
+			int startRaw = (currentPage-1)*pageSize + 1;
+			
+			// 시작 페이지(int형이므로 몫만 나옴 소수점 안나옴)
+			int startPage = startRaw / pageSize + 1;
+			
+			// 종료(끝) 페이지
+			int total = boardDAO.getBoardCount();	// 총 행수가 나누어 떨어지지 않으면 페이지 수에 1을 더함
+			int endPage = (int)(total / pageSize);		// 총행수 / 페이지당 행의 수
+			endPage = (total % pageSize == 0) ? endPage : endPage+1;
+			
+			// 게시글 목록보기 함수 호출
+			ArrayList<Board> boardList = boardDAO.getBoardList(currentPage);
+			
 			// 모델 생성
 			request.setAttribute("boardList", boardList);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			
 			nextPage = "/board/boardList.jsp";
+			
 		}else if(command.equals("/boardForm.do")) {		// 글 쓰기
 			nextPage = "/board/boardForm.jsp";			
 		}else if(command.equals("/addBoard.do")) {		// 글 올리기
 			
-			String realFolder = "C:/Users/laptop/Desktop/coding/jspWorks/Members/src/main/webapp/upload";
+			String realFolder = "C:\\Users\\Administrator\\git\\jspWorks\\Members\\src\\main\\webapp\\upload";	// 깃 위치로 변경함
 			MultipartRequest multi = new MultipartRequest(request, realFolder, 5*1024*1024, "utf-8", new DefaultFileRenamePolicy());
 			
 			// 글쓰기 폼에 입력된 데이터 받아오기(request는 사용하지 않고 multi를 사용함)
