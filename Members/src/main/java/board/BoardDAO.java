@@ -46,9 +46,9 @@ public class BoardDAO {
 		int pageSize = 10;
 		conn = JDBCUtil.getConnection();
 		String sql = "SELECT * "
-				+ "FROM (SELECT ROWNUM RN, t_board.* "
-				+ "FROM t_board ORDER BY bnum DESC) "
-				+ "WHERE RN >= ? AND RN <= ?";
+				+ "FROM (SELECT ROWNUM rn, board.* FROM(SELECT * "
+				+ "FROM t_board ORDER BY bnum DESC) board) "
+				+ "WHERE rn >= ? AND rn <= ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (page-1)*pageSize+1);	// 시작행

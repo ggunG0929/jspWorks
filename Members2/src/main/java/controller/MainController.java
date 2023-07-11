@@ -139,18 +139,18 @@ public class MainController extends HttpServlet {
 			// 각 페이지의 첫 행: 1page->1~, 2page->11~, 3page->21~
 			int currentPage = Integer.parseInt(pageNum);
 			int pageSize = 10;
-			int startRaw = (currentPage-1)*pageSize + 1;
+			int startRow = (currentPage-1)*pageSize + 1;
 			
 			// 시작 페이지(int형이므로 몫만 나옴 소수점 안나옴)
-			int startPage = startRaw / pageSize + 1;
+			int startPage = startRow / pageSize + 1;
 			
 			// 종료(끝) 페이지
 			int total = boardDAO.getBoardCount();	// 총 행수가 나누어 떨어지지 않으면 페이지 수에 1을 더함
-			int endPage = (int)(total / pageSize);		// 총행수 / 페이지당 행의 수
+			int endPage = (total / pageSize);		// 총행수 / 페이지당 행의 수
 			endPage = (total % pageSize == 0) ? endPage : endPage+1;
 			
 			// 게시글 목록보기 함수 호출
-			ArrayList<Board> boardList = boardDAO.getBoardList(currentPage);
+			ArrayList<Board> boardList = boardDAO.getBoardList(startRow, pageSize);
 			
 			// 모델 생성
 			request.setAttribute("boardList", boardList);
@@ -222,8 +222,6 @@ public class MainController extends HttpServlet {
 			
 			boardDAO.updateBoard(updateBoard);	// 수정 처리
 			nextPage = "/boardList.do";
-		} else if(command.equals("/memberEvent.do")) { 
-			nextPage = "/member/memberEvent.jsp";
 		}
 		
 		// 포워딩 - 새로고침 자동 저장 오류 해결
