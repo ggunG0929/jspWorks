@@ -32,6 +32,7 @@
 								(작성일: <fmt:formatDate value="${board.regDate }" pattern = "yyyy-MM-dd HH:mm:ss"/>)
 							</c:otherwise>
 						</c:choose>
+						<c:out value="조회: ${board.hit }"/>
 					</td>
 				</tr>
 				<tr>
@@ -44,6 +45,21 @@
 					</td>
 				</tr>
 			</table>
+			<!-- 댓글 영역 -->
+			<h3>댓글</h3>
+			<c:forEach items="${replyList }" var="reply">
+			<div>
+				<p>${reply.rcontent }</p>
+				<p>작성자: ${reply.replyer }</p>
+			</div>
+			</c:forEach>
+			<!-- 댓글 등록 -->
+			<form action="/addReply.do" method="post">
+				<p>
+					<textarea name="rcontent" rows="3" cols="76" placeholder="댓글을 남겨주세요"></textarea>
+				</p>
+				<button type="submit">등록</button>
+			</form>
 		</section>
 	</div>
 	<jsp:include page="../footer.jsp"/>
