@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,11 @@
 <title>게시글 상세 보기</title>
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
+<%
+	/* pageContext - 동일 페이지에서 저장 기능 */
+	pageContext.setAttribute("LF", "\n");	// 엔터(\n)를 치면 아스키코드 LF(line feed)
+	pageContext.setAttribute("BR", "<br>");	// 줄바꿈(<br>)을 치면 아스키코드 BR
+%>
 <body>
 	<jsp:include page="../header.jsp"/>
 	<div id="container">
@@ -46,20 +52,31 @@
 				</tr>
 			</table>
 			<!-- 댓글 영역 -->
-			<h3>댓글</h3>
+			<h3><i class="fa-solid fa-pen-to-square"></i> 댓글</h3>
 			<c:forEach items="${replyList }" var="reply">
-			<div>
-				<p>${reply.rcontent }</p>
-				<p>작성자: ${reply.replyer }</p>
+			<div class=reply>
+				<!-- 댓글 내용 줄바꿈 -->
+				<p><c:out value="${fn:replace(reply.rcontent, LF, BR) }" escapeXml="false" /></p>
+				<p>작성자: ${reply.replyer } (작성일: ${reply.rdate })</p>
 			</div>
 			</c:forEach>
 			<!-- 댓글 등록 -->
-			<form action="/addReply.do" method="post">
-				<p>
-					<textarea name="rcontent" rows="3" cols="76" placeholder="댓글을 남겨주세요"></textarea>
-				</p>
-				<button type="submit">등록</button>
-			</form>
+			<c:if test = "${not empty sessionId }">
+				<form action="/addReply.do" method="post" id="replyForm">
+					<p>${sessionId }</p>
+					<p><input type="hidden" name="bnum" value="${board.bnum }"></p>
+					<p><input type="hidden" name="replyer" value="${sessionId }"></p>
+					<p>
+						<textarea name="rcontent" rows="3" cols="76" placeholder="댓글을 남겨주세요"></textarea>
+					</p>
+					<button type="submit">등록</button>
+				</form>
+			</c:if>
+			<c:if test="${empty sessionId }">
+				<div class="replyLogin">
+					<a href="/loginForm.do"><i class="fa-solid fa-user"></i> 로그인한 사용자만 댓글 등록이 가능합니다.</a>
+				</div>
+			</c:if>
 		</section>
 	</div>
 	<jsp:include page="../footer.jsp"/>

@@ -63,8 +63,18 @@ public class MainController extends HttpServlet {
 		
 		// 세션 객체 생성
 		HttpSession session = request.getSession();		// import javax.servlet
-	
-		if(command.equals("/memberList.do")) {			// 회원 목록 조회
+		
+        if(command.equals("/index.do")) {
+        	// 게시글 가져오기
+            ArrayList<Board> recentList = boardDAO.getBoardList();
+            // 선생님방식(내 방식에서는 boardDAO에서 sql명령어로 처리했기에 생략가능)
+//            int size = recentList.size();
+//            Board[] recentList = {recentList.get(size-1), recentList.get(size-2), recentList.get(size-3)};
+            // 모델 생성
+        	request.setAttribute("recentList", recentList);
+        	// main 페이지로 포워딩
+            nextPage="/main.jsp";
+        }else if(command.equals("/memberList.do")) {	// 회원 목록 조회
 			ArrayList<Member> memberList = memberDAO.getMemberList();	// import arraylist		// import member
 			// 모델 생성 및 보내기
 			request.setAttribute("memberList", memberList);
@@ -212,12 +222,12 @@ public class MainController extends HttpServlet {
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			boardDAO.deleteBoard(bnum);
 			nextPage = "/boardList.do";		// 삭제 후 게시글 목록으로 이동	// jsp로 하면 글이 없는 목록이 뜸
-		}else if(command.equals("/updateBoard.do")) {
+		}else if(command.equals("/updateBoard.do")) {	// 글 수정하러 가기
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			Board board = boardDAO.getBoard(bnum);	// 게시글 상세보기
 			request.setAttribute("board", board);
 			nextPage = "/board/updateBoard.jsp";
-		}else if(command.equals("/updateProcess.do")) {
+		}else if(command.equals("/updateProcess.do")) {	// 글 수정과정
 			// 수정 폼에서 입력 내용 받기
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			String title = request.getParameter("title");
@@ -230,14 +240,29 @@ public class MainController extends HttpServlet {
 			
 			boardDAO.updateBoard(updateBoard);	// 수정 처리
 			nextPage = "/boardList.do";
-		}
+		}else if(command.equals("/addReply.do")) {	// 댓글 등록 과정
+			// 댓글 폼에 입력된 데이터 가져옴
+			int bnum = Integer.parseInt(request.getParameter("bnum"));
+			String rcontent = request.getParameter("rcontent");
+			String replyer = request.getParameter("replyer");
+			
+			Reply newReply = new Reply();
+			newReply.setBnum(bnum);
+			newReply.setRcontent(rcontent);
+			newReply.setReplyer(replyer);
+			
+			replyDAO.addReply(newReply);	// 댓글 등록 처리
+		}  
 		
 		// 포워딩 - 새로고침 자동 저장 오류 해결
 		if(command.equals("/addBoard.do")) {	// 글올리기 요청시
 			response.sendRedirect("/boardList.do");
-		}else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);	// import	// nextPage로 고쳐주어야 command에 따라 넘어갈 페이지가 바뀜
-			dispatcher.forward(request, response);
-		}
+		}else if(command.equals("/addReply.do")) {	// 댓글 등록시
+			int bnum = Integer.parseInt(request.getParameter("bnum"));
+			response.sendRedirect("/boardView.do?bnum=" + bnum);
+		}else{
+            RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);	// import	// nextPage로 고쳐주어야 command에 따라 넘어갈 페이지가 바뀜
+            dispatcher.forward(request, response);
+        }
 	}
 }

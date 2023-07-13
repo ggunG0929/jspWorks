@@ -15,7 +15,7 @@ public class BoardDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	// 게시글 목록
+	// 게시글 목록(페이징X)
 //	public ArrayList<Board> getBoardList() {	// import java.util
 //		ArrayList<Board> boardList = new ArrayList<>();
 //		conn = JDBCUtil.getConnection();
@@ -41,6 +41,8 @@ public class BoardDAO {
 //		}
 //		return boardList;
 //	}
+	
+	// 게시글 목록(페이지처리)
 	public ArrayList<Board> getBoardList(int startRow, int pageSize) {
 		ArrayList<Board> boardList = new ArrayList<>();
 		try {
@@ -69,6 +71,36 @@ public class BoardDAO {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
 		return boardList;
+	}
+	
+	// 최신글목록
+	public ArrayList<Board> getBoardList() {
+		ArrayList<Board> recentList = new ArrayList<>();
+		try {
+			conn = JDBCUtil.getConnection();
+			// 3개(내 방식)
+			String sql = "SELECT * FROM t_board ORDER BY bnum DESC limit 0,3";
+//			// 선생님 방식
+//			String sql = "SELECT * FROM t_board ORDER BY bnum";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board recent = new Board();
+				recent.setBnum(rs.getInt("bnum"));
+				recent.setTitle(rs.getString("title"));
+				recent.setContent(rs.getString("content"));				// 사실상 불필요
+				recent.setRegDate(rs.getTimestamp("regdate"));
+				recent.setModifyDate(rs.getTimestamp("modifydate"));	// 사실상 불필요
+				recent.setHit(rs.getInt("hit"));						// 사실상 불필요
+				recent.setMemberId(rs.getString("memberid"));
+				recentList.add(recent); // 개별 Board 객체를 추가
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return recentList;
 	}
 	
 	// 게시글 총 개수

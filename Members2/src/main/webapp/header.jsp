@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+<!-- 모든 페이지에 들어가기에 여기에서 폰트어썸 연결 -->
+<script src="https://kit.fontawesome.com/c33abba1b7.js" crossorigin="anonymous"></script>
 <header>
 	<div id="logo">
 		<h1>
-			<a href="index.jsp">Gangnam</a>
+			<a href="/">Gangnam</a>
 		</h1>
 	</div>
 	<nav>
