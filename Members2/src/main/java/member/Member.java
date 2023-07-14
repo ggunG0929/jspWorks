@@ -1,6 +1,7 @@
 package member;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Member implements Serializable {	// member add default versionID	//	serializable import
@@ -12,7 +13,7 @@ public class Member implements Serializable {	// member add default versionID	//
 	private String passwd;
 	private String name;
 	private String gender;
-	private Date joinDate;	// date import java.util
+	private Timestamp joinDate;		// date->timestamp import java.util
 	
 	// 생성자
 	public Member() {}
@@ -45,7 +46,7 @@ public class Member implements Serializable {	// member add default versionID	//
 	public Date getJoinDate() {
 		return joinDate;
 	}
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(Timestamp joinDate) {
 		this.joinDate = joinDate;
 	}
 	
