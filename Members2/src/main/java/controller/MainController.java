@@ -111,9 +111,13 @@ public class MainController extends HttpServlet {
 		}else if(command.equals("/memberUpdateForm.do")) {	// 회원 정보수정
 			String memberId = request.getParameter("memberId");
 			Member member = memberDAO.getMember(memberId);
+			String language = request.getParameter("language");		// 다국어 전환시에도 정보 바인딩
+			// 모델 생성
 			request.setAttribute("member",  member);
+			request.setAttribute("language", language);				// 다국어 전환시에도 정보 바인딩
+			// 회원 수정 페이지로 이동
 			nextPage="member/memberUpdateForm.jsp";
-		}else if(command.equals("updateMember.do")) {
+		}else if(command.equals("/updateMember.do")) {
 			// 회원정보 수정폼에 입력된 자료 받기
 			String memberId = request.getParameter("memberId");
 			String passwd = request.getParameter("passwd1");
@@ -290,8 +294,9 @@ public class MainController extends HttpServlet {
 		
 		
 		// 포워딩 - 새로고침 자동 저장 오류 해결
-		if(command.equals("/addBoard.do")) {			// 게시글 등록 후 게시판으로
-			response.sendRedirect("/boardList.do");
+		if(command.equals("/updateMember.do")) {		// 회원정보 수정 후 회원정보 페이지로
+			String memberId = request.getParameter("memberId");
+			response.sendRedirect("/memberView.do?memberId=" + memberId);
 		
 		}else if(command.equals("/addReply.do")
 				||command.equals("/deleteReply.do")
@@ -299,9 +304,8 @@ public class MainController extends HttpServlet {
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			response.sendRedirect("/boardView.do?bnum=" + bnum);
 		
-		}else if(command.equals("/updateMember.do")) {	// 회원정보 수정 후 회원정보 페이지로
-			String memberId = request.getParameter("memberId");
-			response.sendRedirect("/memberView.do?memberId=" + memberId);
+		}else if(command.equals("/addBoard.do")) {		// 게시글 등록 후 게시판으로
+			response.sendRedirect("/boardList.do");
 			
 		}else{
 			// nextPage로 고쳐주어야 command에 따라 넘어갈 페이지가 바뀜

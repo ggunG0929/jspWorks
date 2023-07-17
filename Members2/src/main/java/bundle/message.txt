@@ -17,3 +17,6 @@ signup.woman=여
 signup.idcheck=ID중복
 signup.submit=가입
 signup.reset=취소
+
+signup.title2=회원수정
+signup.save=저장
