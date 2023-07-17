@@ -113,6 +113,20 @@ public class MainController extends HttpServlet {
 			Member member = memberDAO.getMember(memberId);
 			request.setAttribute("member",  member);
 			nextPage="member/memberUpdateForm.jsp";
+		}else if(command.equals("updateMember.do")) {
+			// 회원정보 수정폼에 입력된 자료 받기
+			String memberId = request.getParameter("memberId");
+			String passwd = request.getParameter("passwd1");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			// member 객체 생성
+			Member member = new Member();
+			member.setMemberId(memberId);
+			member.setPasswd(passwd);
+			member.setName(name);
+			member.setGender(gender);
+			// memberDAO의 updateMember()를 호출
+			memberDAO.updateMember(member);
 			
 		}else if(command.equals("/loginForm.do")) {		// 로그인
 			nextPage = "/member/loginForm.jsp";
@@ -144,9 +158,13 @@ public class MainController extends HttpServlet {
 		}else if(command.equals("/deleteMember.do")) {	// 회원 탈퇴
 			String memberId = request.getParameter("memberId");
 			memberDAO.deleteMember(memberId);
-//			nextPage="/memberList.do";	// 관리자가 회원 삭제 처리했을 때
 			session.invalidate();	// 회원이 직접 탈퇴시 - 세션아웃
 			nextPage="/index.jsp";
+			
+		}else if(command.equals("/deleteMember2.do")) {	// 회원 탈퇴
+			String memberId = request.getParameter("memberId");
+			memberDAO.deleteMember(memberId);
+			nextPage="/memberList.do";	// 관리자가 회원 삭제 처리했을 때
 		
 //		}else if(command.equals("memberEvent.do")) {
 //			nextPage="member/memberEvent.jsp";
@@ -272,17 +290,18 @@ public class MainController extends HttpServlet {
 		
 		
 		// 포워딩 - 새로고침 자동 저장 오류 해결
-		if(command.equals("/addBoard.do")) {			// 게시글 등록
+		if(command.equals("/addBoard.do")) {			// 게시글 등록 후 게시판으로
 			response.sendRedirect("/boardList.do");
 		
 		}else if(command.equals("/addReply.do")
 				||command.equals("/deleteReply.do")
-				||command.equals("/updateReply.do")) {	// 댓글 등록, 삭제, 수정
+				||command.equals("/updateReply.do")) {	// 댓글 등록, 삭제, 수정 후 해당 댓글이 있는 게시글로
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			response.sendRedirect("/boardView.do?bnum=" + bnum);
 		
-//		}else if(command.equals("/")) {
-//			response.sendRedirect("" + )
+		}else if(command.equals("/updateMember.do")) {	// 회원정보 수정 후 회원정보 페이지로
+			String memberId = request.getParameter("memberId");
+			response.sendRedirect("/memberView.do?memberId=" + memberId);
 			
 		}else{
 			// nextPage로 고쳐주어야 command에 따라 넘어갈 페이지가 바뀜

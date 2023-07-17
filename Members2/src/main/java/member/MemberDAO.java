@@ -140,5 +140,23 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	// 회원 수정
+	public void updateMember(Member member) {
+		conn = JDBCUtil.getConnection();
+		String sql = "update t_member set passwd = ?, name = ?, gender = ? where memberid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1, member.getPasswd());
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getGender());
+			pstmt.setString(4, member.getMemberId());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 
 }

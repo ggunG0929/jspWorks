@@ -50,7 +50,7 @@
 						<td><c:out value="${member.name }"></c:out></td>
 						<td><c:out value="${member.gender }"></c:out></td>
 						<td><fmt:formatDate value="${member.joinDate }" pattern = "yyyy-MM-dd HH:mm:ss"/></td>
-						<td><a href="/deleteMember.do?memberId=${member.memberId }" onclick="return confirm('정말로 삭제하시겠습니까?')"><button type="button">삭제</button></a></td>
+						<td><a href="/deleteMember2.do?memberId=${member.memberId }" onclick="return confirm('정말로 삭제하시겠습니까?')"><button type="button">삭제</button></a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
