@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<!-- 삭제해도 됨 -->
+<!--   <display-name>Jspwork2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list> -->
+  
+	<!-- 필터: 한글 인코딩 -->
+	<filter>
+		<filter-name>AuthenFilter</filter-name>
+		<filter-class>filter.AuthenFilter</filter-class>
+	</filter>
+  
+	<filter-mapping>
+		<filter-name>AuthenFilter</filter-name>
+		<url-pattern>/filter/filter01_process.jsp</url-pattern>
+	</filter-mapping>
+  
+	<!-- 필터: 로그인 인증 -->
+	<filter>
+		<filter-name>InitParamFilter</filter-name>
+		<filter-class>filter.InitParamFilter</filter-class>
+		<init-param>
+			<param-name>param1</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>param2</param-name>
+			<param-value>admin1234</param-value>
+		</init-param>
+	</filter>
+  
+	<filter-mapping>
+		<filter-name>InitParamFilter</filter-name>
+		<url-pattern>/filter/filter02_process.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- 필터: 로그인 인증을 로그 파일로 기록 -->
+	<filter>
+	 	<filter-name>LogFileFilter</filter-name>
+		<filter-class>filter.LogFileFilter</filter-class>
+		<init-param>
+			<param-name>filename</param-name>
+			<!-- c:/logs까지는 수동생성하고 monitor.log는 자동생성될 예정 -->
+			<param-value>c:/logs/monitor.log</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>LogFileFilter</filter-name>
+		<url-pattern>/filter/filter02_process.jsp</url-pattern>
+	</filter-mapping>
+
+</web-app>

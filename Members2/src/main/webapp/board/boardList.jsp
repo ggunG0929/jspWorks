@@ -14,6 +14,15 @@
 	<div id="container">
 		<section id="boardlist">
 			<h2>게시판 목록</h2>
+			<!-- 검색 폼 -->
+			<form action="" method="get" class="search_form">
+				<select name="field" class="sel_field">
+					<option ${(field == "title")? "selected":""} value="title">제목</option>
+					<option ${(field == "memberId")? "selected":""} value="memberId">작성자</option>
+				</select>
+				<input type="text" name="kw" class="in_kw" value="${kw }">
+				<button type="submit">검색</button>
+			</form>
 			<table id="brd_table">
 				<thead>
 					<tr>
@@ -40,7 +49,7 @@
 			<div class="pagination">
 				<!-- 이전 페이지 -->
 				<c:if test="${startPage > 1}">
-					<a href="/boardList.do?pageNum=${startPage-1}">이전</a><!-- boardlist -> boardList -->
+					<a href="/boardList.do?pageNum=${startPage-1}">이전</a><!-- 오류해결: boardlist -> boardList -->
 				</c:if>
 				<c:if test="${startPage == 1}">
 					<a href="">이전</a>

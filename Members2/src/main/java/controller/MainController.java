@@ -51,10 +51,7 @@ public class MainController extends HttpServlet {
 		
 		// command 패턴으로 url 설정하기
 		String uri = request.getRequestURI();
-		System.out.println(uri);
 		String command = uri.substring(uri.lastIndexOf('/'));
-		System.out.println(uri.lastIndexOf('/'));
-		System.out.println("command: " + command);
 		
 		String nextPage = null;
 		
@@ -177,6 +174,17 @@ public class MainController extends HttpServlet {
 		
 		// 게시판 관리
 		if(command.equals("/boardList.do")) {			// 게시글 목록
+			// 검색 처리
+			String _field = request.getParameter("field");
+			String _kw = request.getParameter("kw");
+			String field = "title";		// 쿼리값이 전달되지 않을 경우 기본값
+			if(_field != null) {		// 쿼리값이 있는 경우
+				field = _field;
+			}
+			String kw = "";		// 쿼리값이 전달되지 않을 경우 기본값
+			if(_kw != null) {	// 쿼리값이 있는 경우
+				kw=_kw;
+			}
 			// 페이지 처리
 			String pageNum = request.getParameter("pageNum");
 			if(pageNum == null) {	// pageNum이 없으면 1페이지로
@@ -193,12 +201,14 @@ public class MainController extends HttpServlet {
 			int endPage = (total / pageSize);		// 총행수 / 페이지당 행의 수
 			endPage = (total % pageSize == 0) ? endPage : endPage+1;
 			// 게시글 목록보기 함수 호출
-			ArrayList<Board> boardList = boardDAO.getBoardList(startRow, pageSize);
+			ArrayList<Board> boardList = boardDAO.getBoardList(field, kw, startRow, pageSize);
 			// 모델 생성
 			request.setAttribute("boardList", boardList);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
+			request.setAttribute("field", field);
+			request.setAttribute("kw", kw);
 			nextPage = "/board/boardList.jsp";
 			
 		}else if(command.equals("/boardForm.do")) {		// 게시글 작성
