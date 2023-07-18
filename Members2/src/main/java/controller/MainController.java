@@ -177,13 +177,17 @@ public class MainController extends HttpServlet {
 			// 검색 처리
 			String _field = request.getParameter("field");
 			String _kw = request.getParameter("kw");
-			String field = "title";		// 쿼리값이 전달되지 않을 경우 기본값
-			if(_field != null) {		// 쿼리값이 있는 경우
+			String field;
+			if(_field != null) {	// 쿼리값이 있는 경우
 				field = _field;
+			}else {
+				field="title";		// 쿼리값이 전달되지 않을 경우 기본값
 			}
-			String kw = "";		// 쿼리값이 전달되지 않을 경우 기본값
-			if(_kw != null) {	// 쿼리값이 있는 경우
+			String kw;
+			if(_kw != null) {		// 쿼리값이 있는 경우
 				kw=_kw;
+			}else {
+				kw="";				// 쿼리값이 전달되지 않을 경우 기본값
 			}
 			// 페이지 처리
 			String pageNum = request.getParameter("pageNum");

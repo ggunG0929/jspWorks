@@ -16,6 +16,10 @@
 			<h2>게시판 목록</h2>
 			<!-- 검색 폼 -->
 			<form action="" method="get" class="search_form">
+				<!-- 임의로 추가 -->
+				<c:if test="${kw != ''}">
+					검색결과: ${boardList.size() }건
+				</c:if>
 				<select name="field" class="sel_field">
 					<option ${(field == "title")? "selected":""} value="title">제목</option>
 					<option ${(field == "memberId")? "selected":""} value="memberId">작성자</option>
