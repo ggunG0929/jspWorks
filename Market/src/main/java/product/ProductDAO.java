@@ -44,4 +44,73 @@ public class ProductDAO {
 		}
 		return productList;
 	}
+	
+	// 상품 상세 보기
+	public Product getProduct(String productId) {
+		Product product = new Product();
+		conn = JDBCUtil.getConnection();
+		String sql = "select * from product where p_id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1, productId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				product.setProductId(rs.getString("p_id"));
+				product.setPname(rs.getString("p_name"));
+				product.setUnitPrice(rs.getInt("p_unitPrice"));
+				product.setDescription(rs.getString("p_description"));
+				product.setCategory(rs.getString("p_category"));
+				product.setManufacturer(rs.getString("p_manufacturer"));
+				product.setUnitsInStock(rs.getLong("p_unitsInStock"));
+				product.setCondition(rs.getString("p_condition"));
+				product.setProductImage(rs.getString("p_productImage"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return product;
+	}
+	
+	// 상품 등록
+	public void addProduct(Product product) {
+		conn = JDBCUtil.getConnection();
+		String sql = "insert into product(p_id, p_name, p_unitPrice, p_description, "
+				+ "p_category, p_manufacturer, p_unitsInStock, p_condition, p_productImage) "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1, product.getProductId());
+			pstmt.setString(2, product.getPname());
+			pstmt.setInt(3, product.getUnitPrice());
+			pstmt.setString(4, product.getDescription());
+			pstmt.setString(5, product.getCategory());
+			pstmt.setString(6, product.getManufacturer());
+			pstmt.setLong(7, product.getUnitsInStock());
+			pstmt.setString(8, product.getCondition());
+			pstmt.setString(9, product.getProductImage());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
+	
+	// 상품 삭제
+	public void deleteProduct(String productId) {
+		conn = JDBCUtil.getConnection();
+		String sql = "delete from product where p_id= ?";
+		try {
+			pstmt = conn.prepareStatement(sql);		// surround with try catch
+			pstmt.setString(1, productId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
+
 }

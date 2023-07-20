@@ -16,7 +16,7 @@
 		<div class="row mx-5" align="center">
 		<c:forEach items="${productList }" var="product" >
 			<div class="col-4">
-				<img src="./upload/${product.productImage }" style="width: 100%;">
+				<img src="./upload/${product.productImage }" style="width:100%">
 				<h3 class="my-2">${product.pname }</h3>
 				<p>${product.description }</p>
 				<p>${product.unitPrice }원</p>

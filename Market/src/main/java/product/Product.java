@@ -15,7 +15,14 @@ public class Product implements Serializable {	// import
 	private long unitsInStock;		// 상품 재고
 	private String condition;		// 신상품 or 중고
 	private String productImage;	// 상품 이미지
+	private Integer quantity;	// 장바구니에 담긴 수량	// 우클>src>getter setter
 	
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 	// 우클>source> generate getter, setter
 	public String getProductId() {
 		return productId;
