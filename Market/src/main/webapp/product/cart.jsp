@@ -16,11 +16,9 @@
 		<div class="row mx-5">
 			<table style="width: 100%">
 				<tr>
-					<td align="left">
-						<a href="" class="btn btn-danger">삭제하기</a>
-					</td>
-					<td align="right">
-						<a href="" class="btn btn-success">주문하기</a>
+				<!-- 임의로 패딩 -->
+					<td align="right" style="padding: 20px">
+						<a href="/productList.do" class="btn btn-secondary">&laquo; 쇼핑 계속하기</a>
 					</td>
 				</tr>
 			</table>
@@ -42,20 +40,27 @@
 								<td>${product.unitPrice }</td>
 								<td>${product.quantity }</td>
 								<td>${product.unitPrice*product.quantity }</td>
-								<td><a href="/removeCart.do?productId=${product.productId }" class="badge bg-dark">삭제</a></td>
+								<!-- 임의로 onclick 추가 -->
+								<td><a href="/removeCart.do?productId=${product.productId }" class="badge bg-dark"
+								 onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
 							</tr>
 						</c:forEach>
-							<tr>
-								<th></th>
-								<th></th>
-								<th>총액</th>
-								<th>${sum }</th>
-								<th></th>
-							</tr>
 					</tbody>
+					<!-- 임의로 tfoot, colspan, 버튼 위치변경 -->
+					<tfoot>
+							<tr>
+								<th><a href="/deleteCart.do" class="btn btn-danger">비우기</a></th>
+								<th colspan="2" style="text-align: center">총액</th>
+								<th>${sum }</th>
+								<th style="text-align: right"><a href="/shippingInfo.do?cartId=${cartId }" 
+									class="btn btn-success">주문하기</a></th>
+							</tr>
+					</tfoot>
 				</table>
+				
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../footer.jsp" />
 </body>
 </html>

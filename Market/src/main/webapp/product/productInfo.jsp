@@ -10,10 +10,17 @@
 <script src="resources/js/bootstrap.js"></script>
 <script>
 	function addToCart(){
-		if(confirm('상품을 장바구니에 추가하시겠습니까?')) {
+ 		if(confirm('상품을 장바구니에 추가하시겠습니까?')) {
 			document.addForm.submit();	// 폼을 전송
 		}else{
 			document.addForm.reset();
+		}
+	}
+	function addToCart2(event){
+		event.preventDefault();
+		document.getElementById("addForm").submit();
+		if(confirm('상품을 장바구니에 담았습니다.\n장바구니로 이동하시겠습니까?')) {
+			location.href="/cart.do"
 		}
 	}
 </script>
@@ -35,14 +42,19 @@
 				<p><b>재고</b>: ${product.unitsInStock }</p>
 				<p>${product.unitPrice }원</p>
 				<p>
-					<form action="/addCart.do?productId=${product.productId }" method="post" name="addForm">
+					<form action="/addCart.do?productId=${product.productId }" method="post" name="addForm" id="addForm">
+ 
 						<a href="#" onclick="addToCart()" class="btn btn-info">상품 주문</a>
 						<a href="/cart.do" class="btn btn-warning">장바구니</a>
+
+						 <!-- 임의로 자바스크립트를 변경했으므로 버튼을 통합함 -->
 						<a href="/productList.do" class="btn btn-secondary">&laquo; 상품 목록</a>
+						<a href="#" onclick="addToCart2(event)" class="btn btn-warning">장바구니</a>
 					</form>
 				</p>
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../footer.jsp" />
 </body>
 </html>
