@@ -1,34 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin 로그인</title>
+<title>로그인</title>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="container my-3" align="center">
-		<%
-			String error = request.getParameter("error");
-			if(error != null) {
-				out.println("<div class='alert alert-danger'>");
-				out.println("아이디와 비밀번호를 확인해 주세요");
-				out.println("</div>");
-			}
-		%>
 		<h3 class="my-5">Please LogIn</h3>
-		<form action="j_security_check" method="post">
+		<c:if test="${not empty error }">
+			<div class="alert alert-danger">
+				${error }
+			</div>
+		</c:if>
+		<form action="/processLogin.do" method="post">
 			<div class="form-group row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4 my-2">
-					<input type="text" name="j_username" class="form-control" placeholder="ID" required autofocus>
+					<input type="text" name="mid" class="form-control" placeholder="ID" required autofocus>
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4 my-2">
-					<input type="password" name="j_password" class="form-control" placeholder="Password" required>
+					<input type="password" name="passwd" class="form-control" placeholder="Password" required>
 				</div>
 			</div>
 			<div class="row">

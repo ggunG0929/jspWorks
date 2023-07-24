@@ -6,8 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>주문 내역</title>
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<script src="resources/js/bootstrap.js"></script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -15,13 +13,13 @@
 		<h2 class="text-left mx-4 my-4">주문 내역</h2>
 		<div class="row mx-5">
 			<p class="text-center" style="font-size: 1.5rem">배송정보</p>
-			<div class="col-4"></div>
-			<div class="col-2">
+			<div class="col-lg-3 col-md-2"></div>
+			<div class="col-lg-3 col-md-4">
 				<p><strong>성명: ${shipping_name }</strong></p>
 				<p>주소: ${shipping_addressName }</p>
 				<p>우편번호: ${shipping_zipCode }</p>
 			</div>
-			<div class="col-2" align="right">
+			<div class="col-lg-3 col-md-4" align="right">
 				<p><em>배송일: ${shipping_shippingDate }</em></p>
 			</div>
 		</div>

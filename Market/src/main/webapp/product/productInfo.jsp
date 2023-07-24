@@ -6,8 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 정보</title>
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<script src="resources/js/bootstrap.js"></script>
 <script>
 	function addToCart(){
  		if(confirm('상품을 장바구니에 추가하시겠습니까?')) {
@@ -16,11 +14,12 @@
 			document.addForm.reset();
 		}
 	}
+	// 임의로 기능을 바꿈. 무조건 장바구니에 담고 컨펌에 의해 장바구니로 이동하도록
 	function addToCart2(event){
 		event.preventDefault();
-		document.getElementById("addForm").submit();
+		location.href="/addCart.do?productId=${product.productId}";
 		if(confirm('상품을 장바구니에 담았습니다.\n장바구니로 이동하시겠습니까?')) {
-			location.href="/cart.do"
+			location.href="/cart.do";
 		}
 	}
 </script>
@@ -46,10 +45,9 @@
  
 						<a href="#" onclick="addToCart()" class="btn btn-info">상품 주문</a>
 						<a href="/cart.do" class="btn btn-warning">장바구니</a>
-
-						 <!-- 임의로 자바스크립트를 변경했으므로 버튼을 통합함 -->
 						<a href="/productList.do" class="btn btn-secondary">&laquo; 상품 목록</a>
-						<a href="#" onclick="addToCart2(event)" class="btn btn-warning">장바구니</a>
+						<!-- 임의로 자바스크립트를 변경했으므로 버튼을 통합함 -->
+						<input type="submit" onclick="addToCart2(event)" class="btn btn-warning" value="장바구니">
 					</form>
 				</p>
 			</div>

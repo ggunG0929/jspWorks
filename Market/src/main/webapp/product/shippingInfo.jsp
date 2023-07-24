@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>배송 정보</title>
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<script src="resources/js/bootstrap.js"></script>
+<link rel="stylesheet" href="resources/css/style.css">
 <script src="resources/js/validation.js"></script>
 </head>
 <body>
@@ -18,44 +17,44 @@
 			<form action="/processShippingInfo.do" method="post">
 				<input type="hidden" name="cartId" value="${cartId }">
 				<div class="form-group row">
-					<!-- 임의로 col3추가 -->
-					<div class="col-sm-3"></div>
-					<label class="col-sm-2">성명</label>
-					<div class="col-sm-4 my-2">
+					<!-- 임의로 col추가 -->				
+					<div class="col-lg-3"></div>
+					<label class="col-lg-2 col-sm-3">성명</label>
+					<div class="col-lg-4 col-sm-7 my-2">
 						<input type="text" name="name" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<div class="col-sm-3"></div>
-					<label class="col-sm-2">배송일</label>
-					<div class="col-sm-4 my-2">
+					<div class="col-lg-3"></div>
+					<label class="col-lg-2 col-sm-3">배송일</label>
+					<div class="col-lg-4 col-sm-7 my-2">
 						<input type="text" name="shippingDate" class="form-control" placeholder="yyyy/mm/dd">
 					</div>
 				</div>
 				<div class="form-group row">
-					<div class="col-sm-3"></div>
-					<label class="col-sm-2">국가명</label>
-					<div class="col-sm-4 my-2">
+					<div class="col-lg-3"></div>
+					<label class="col-lg-2 col-sm-3">국가명</label>
+					<div class="col-lg-4 col-sm-7 my-2">
 						<input type="text" name="country" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<div class="col-sm-3"></div>
-					<label class="col-sm-2">우편번호</label>
-					<div class="col-sm-4 my-2">
+					<div class="col-lg-3"></div>
+					<label class="col-lg-2 col-sm-3">우편번호</label>
+					<div class="col-lg-4 col-sm-7 my-2">
 						<input type="text" name="zipCode" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<div class="col-sm-3"></div>
-					<label class="col-sm-2">주소</label>
-					<div class="col-sm-4 my-2">
+					<div class="col-lg-3"></div>
+					<label class="col-lg-2 col-sm-3">주소</label>
+					<div class="col-lg-4 col-sm-7 my-2">
 						<input type="text" name="addressName" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-4 my-2">
+					<div class="col-lg-3"></div>
+					<div class="col-lg-6 my-5" align="center">
 						<input type="submit" value="등록" class="btn btn-primary">
 						<a href="/checkOutCancel.do" class="btn btn-secondary">취소</a>
 					</div>
