@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!-- 부트스트랩 -->
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<script src="resources/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/resources/css/bootstrap.css">
+<script src="/resources/js/bootstrap.js"></script>
 	<!-- 헤더메뉴 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
