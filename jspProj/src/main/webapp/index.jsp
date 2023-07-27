@@ -22,7 +22,12 @@
 <a href="err/ddd.jsp">web.xml-404</a>
 <a href="err/eee.jsp">type</a>
 
+<h2>request</h2>
+<a href="request/numForm.jsp">숫자입력</a>
+
 <h2>exercise</h2>
-<a href="369.jsp">369</a>
+<a href="exercise/369.jsp">369</a>
+<a href="exercise/star.jsp">star</a>
+<a href="exercise/sum.jsp">sum</a>
 </body>
 </html>
