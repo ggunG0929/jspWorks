@@ -3,12 +3,12 @@ package excercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stud {
+public class Student {
 	
 	String sname;
 	int kor, eng, math, sum, avg, rank;
 	
-	public Stud(String sname, String kor, String eng, String math) {
+	public Student(String sname, String kor, String eng, String math) {
 		super();
 		this.sname = sname;
 		this.kor = Integer.parseInt(kor);
@@ -22,9 +22,9 @@ public class Stud {
 		avg = sum / 3;
 	}
 	
-	void calcRank(ArrayList<Stud> stuList) {
+	void calcRank(ArrayList<Student> stuList) {
 		rank= 1;
-		for (Stud stu : stuList) {
+		for (Student stu : stuList) {
 			if(avg < stu.avg) {
 				rank++;
 			}

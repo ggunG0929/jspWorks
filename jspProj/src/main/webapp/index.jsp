@@ -24,10 +24,11 @@
 
 <h2>request</h2>
 <a href="request/numForm.jsp">숫자입력</a>
+<a href="request/examForm.jsp">점수입력</a>
 
 <h2>exercise</h2>
 <a href="exercise/369.jsp">369</a>
 <a href="exercise/star.jsp">star</a>
-<a href="exercise/sum.jsp">sum</a>
+<a href="exercise/subForm.jsp">sum</a>
 </body>
 </html>

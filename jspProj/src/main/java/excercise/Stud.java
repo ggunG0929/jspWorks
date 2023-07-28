@@ -1,9 +1,8 @@
-package basic_p;
+package excercise;
 
 import java.util.ArrayList;
 
 public class Stud {
-	
 	
 	
 	String name;

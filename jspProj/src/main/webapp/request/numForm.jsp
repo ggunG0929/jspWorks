@@ -20,7 +20,6 @@
 </script>
 </head>
 <body>
-cnt: <%=cnt %>
 <h1>numForm</h1>
 <form action="numReg.jsp" name="regForm">
 	<table border="">
