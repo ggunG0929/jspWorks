@@ -49,22 +49,30 @@
 	    }
 	    Students[i] = new Exam2(pname[i], jum);
 	}
+	
     // 등수 연산 메소드 호출
-    for (Exam2 student : Students) {
+    for(Exam2 student : Students) {
         student.rankCalc(Students);
     }
-
+    
+    // 과목별등수 연산 메소드 호출
+    for(int i=0; i<title.length; i++) {	
+	    for(Exam2 student : Students) {
+	        student.jumrankCalc(Students, i);
+	    }
+    }
 %>
 	<table border="" style="border-collapse: collapse">
 		<tr>
 			<td>이름 과목</td>
 			<% for(int i=0; i<title.length; i++) { %>
 				<td><%=title[i] %></td>
+				<td>등수</td>
 			<% } %>
 			<td>총점</td>
 			<td>평균</td>
 			<td>등급</td>
-			<td>등수</td>
+			<td>전체등수</td>
 		</tr>
 		
 		<!-- 입력한 순서대로 출력 -->
@@ -87,7 +95,10 @@
 					<tr>
 						<td><%=Students[k].getName() %></td>
 						<%	for(int j=0; j<title.length; j++) { %>
+							<!-- 과목별 점수 출력 -->
 			                <td><%= Students[k].getJum()[j] %></td>
+			                <!-- 과목별 등수 출력 -->
+			                <td><%= Students[k].getJumrank()[j] %></td>
 		        	    <% } %>
 						<%=Students[k].toString() %>
 					</tr>

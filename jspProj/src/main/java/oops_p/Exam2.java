@@ -3,7 +3,7 @@ package oops_p;
 public class Exam2 {
 	// 필드 선언
 	String name, grade;
-	int[] jum;
+	int[] jum, jumrank;
 	int tot, rank;
 	// rank 연산시 더 정확하도록 double 적용
 	double avg;
@@ -12,6 +12,7 @@ public class Exam2 {
 	public Exam2(String name, int ... jum) {
 		this.name = name;
 		this.jum = jum.clone();		// 원래는 배열이라 대입시 주소를 가져와 마지막 학생의 점수만으로 출력됨. 깊은 복사를 통해 값을 받음.
+		this.jumrank = new int[jum.length]; // jumrank 배열 초기화
 		// tot, avg, grade 연산
 		calc();
 	}
@@ -33,9 +34,20 @@ public class Exam2 {
 		for(Exam2 you : exArr) {
 			// 내 평균이 남의 평균보다 낮을 경우 등수가 늘어나 순위가 낮아짐
 //			if(avg<you.avg) {	//Cannot read field "avg" because "you" is null
-//	        if (avg<you.avg && you!=null) {	// 역시 같은 오류, 널처리를 앞에 넣어줘야 함
-        	if (you!=null && avg<you.avg) {
+//	        if(avg<you.avg && you!=null) {	// 역시 같은 오류, 널처리를 앞에 넣어줘야 함
+        	if(you!=null && avg<you.avg) {
 				rank++;
+			}
+		}
+	}
+	
+	// jumrank 연산(과목별 등수)
+	public void jumrankCalc(Exam2 [] exArr, int index) {
+		// 등수 초기값 1위
+		jumrank[index] = 1;
+		for(Exam2 you : exArr) {
+			if(you!=null && jum[index]<you.jum[index]) {
+				jumrank[index]++;
 			}
 		}
 	}
@@ -47,6 +59,10 @@ public class Exam2 {
 
 	public int[] getJum() {
 		return jum;
+	}
+	
+	public int[] getJumrank() {
+		return jumrank;
 	}
 	
 	public int getRank() {
