@@ -1,139 +1,89 @@
-<%@page import="java.util.Arrays"%>
+<%@page import="oops_p.Exam2"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>examReg</title>
+<title>examReg-자바연결</title>
 </head>
 <body>
-<h1>examReg</h1>
+<h1>examReg-자바연결</h1>
 <%
 	String [] pname = request.getParameterValues("pname");
-	String [] title = "kor,eng,mat".split(",");
-	// title = ["kor", "eng", "mat"]
-	int [][] arr = new int[title.length][pname.length];
+	// pname = ["학생(i+1)"]
 	
-	for(int i=0; i<title.length; i++) {
-		String [] str = request.getParameterValues(title[i]);
-		for(int j=0; j<str.length; j++) {
-			arr[i][j] = Integer.parseInt(str[j]); 
-		}
+	String [] title = request.getParameterValues("title");
+	// title = ["sub(i+1)"]
+	
+	String [] jumsu = request.getParameterValues("jumsu");
+	// jumsu = [학생1sub1, 학생1sub2, 학생1sub3,
+	//			학생2sub1, 학생2sub2, 학생2sub3, ...]
+
+	// jumsu를 이중배열 jum2로 -- 이중배열을 거치지 않고 바로 연산으로 범위를 정해 java로 보낼 수 있지 않을까? 일단 나중에 
+	int[][] jum2 = new int[pname.length][title.length];
+	int index = 0;
+	for(int i=0; i<pname.length; i++) {
+	    for(int j=0; j<title.length; j++) {
+	        jum2[i][j] = Integer.parseInt(jumsu[index++]);
+	    }
 	}
+	// jum2에서 해당 학생의 점수만 jum으로
+    Exam2[] Students = new Exam2[pname.length];
+    for(int i=0; i<pname.length; i++) {
+	    int[] jum = new int[title.length];	// 초기화
+    	for(int j=0; j<title.length; j++) {
+    		jum[j] = jum2[i][j];	// The local variable jum may not have been initialized
+    	}
+        Students[i] = new Exam2(pname[i], jum);
+    }
+    // 등수 연산 메소드 호출
+    for (Exam2 student : Students) {
+        student.rankCalc(Students);
+    }
+
 %>
-	<table border="">
+	<table border="" style="border-collapse: collapse">
 		<tr>
-			<td>이름</td>
-			<td>국어</td>
-			<td>영어</td>
-			<td>수학</td>
+			<td>이름 과목</td>
+			<% for(int i=0; i<title.length; i++) { %>
+				<td><%=title[i] %></td>
+			<% } %>
 			<td>총점</td>
 			<td>평균</td>
+			<td>등급</td>
 			<td>등수</td>
 		</tr>
-		<% for(int i=0; i<pname.length; i++) { %>
+		
+		<!-- 입력한 순서대로 출력 -->
+<%-- 	<% for(Exam2 student : Students) { %>
 		<tr>
-			<td><%=pname[i] %></td>
-			<% for(int j=0; j<pname.length; j++) { %>
-			<td><%= %></td>
-			<td></td>
-			<td></td>
-			<% } %>
-		</tr>
-		<% } %>
-		<tr>
-			<td colspan=4 align="right"><input type="submit" value="전송"></td>
-		</tr>
+            <td><%=student.getName() %></td>
+            <% for (int j=0; j<title.length; j++) { %>
+                <td><%= student.getJum()[j] %></td>
+            <% } %>
+			<%=student.toString() %>
+	<% } %> --%>
+	
+		<!-- 등수기준으로 출력 -->
+		<%	
+		for(int i=0; i<pname.length; i++) {
+			for(int k=0; k<pname.length; k++) {
+				// 학생들 중 i에 따라 1등부터 pname.length+1등인 인덱스를 갖고 있는 k인덱스를 찾아내서 출력
+				if(Students[k].getRank()==i+1) { 
+		%>			
+					<tr>
+						<td><%=Students[k].getName() %></td>
+						<%	for(int j=0; j<title.length; j++) { %>
+			                <td><%= Students[k].getJum()[j] %></td>
+		        	    <% } %>
+						<%=Students[k].toString() %>
+					</tr>
+		<% 
+				}
+			}
+		} 
+		%>
 	</table>
 </body>
 </html>
-
-<%-- <body>
-<h1>examReg</h1>
-<%
-
-	//초기화
-	String [] pname = request.getParameterValues("pname");
-	String [] title = "kor,eng,mat".split(",");
-	// title = [kor, eng, mat]
-			    //0   1    2
-	int [][] arr = new int[title.length][pname.length];
-	
-	//   ? 각 사람
-	//res[?][0] - 총점
-	//res[?][1] - 평균
-	//res[?][2] - 등수
-	int [][] res = new int[pname.length][title.length];
-	
-	
-	// 입력부
-	for(int i = 0; i<title.length; i++){
-		String [] jj = request.getParameterValues(title[i]);
-		for(int j = 0; j<jj .length; j++){
-			arr[i][j] = Integer.parseInt(jj[j]);
-		}
-	}
-	
-	
-	//연산부
-	// p : 사람
-	for(int p = 0; p<res.length; p++){
-		
-		//총점
-		res[p][0] = 0;
-		
-		//점수 : j 과목
-		for(int j = 0; j<arr.length; j++){
-			res[p][0] += arr[j][p];
-		}
-		
-		//평균
-		res[p][1] = res[p][0]/arr.length;
-	} 
-	
-	//분석
-	for(int me = 0; me<res.length; me++){
-		res[me][2] = 1;	
-		
-		for(int you = 0; you<res.length; you++){
-			
-			if(res[me][1] < res[you][1] ){
-				res[me][2]++;	
-			}
-		}
-	}
-	
-	
-%>
-
-
-<!-- 출력부 -->
-<table border="">
-		<tr>
-			<td>이름</td>
-			<td>국어</td>
-			<td>영어</td>
-			<td>수학</td>
-			<td>총점</td>
-			<td>평균</td>
-			<td>등수</td>
-		</tr>
-<% 
-for(int r = 1; r<=pname.length; r++){
-	
-	for(int i = 0; i<pname.length; i++){ 
-		if(r == res[i][2]) {%>	
-		<tr>
-			<td><%=pname[i] %> <%=r %></td>
-			<% for(int j = 0; j<arr.length; j++){ %>				
-				<td><%=arr[j][i] %></td>
-			<%} 
-			 for(int j = 0; j<res[i].length; j++){ %>				
-				<td><%=res[i][j] %></td>
-			<%} %>		
-		</tr>
-<%}}}%>		
-
-</table>
-</body> --%>

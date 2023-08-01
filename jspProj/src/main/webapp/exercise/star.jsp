@@ -10,8 +10,8 @@
 <%
 	for(int i=0; i<13; i++) {
 		if(i==0 || i==12) {
-			for(int j=0; j<17; j++) {
-				if(j==8) {
+			for(int j=0; j<19; j++) {
+				if(j==9) {
 					out.println("*");
 				}else {
 					out.println("_");
@@ -19,8 +19,8 @@
 			}
 		}
 		if(i==1 || i==11) {
-			for(int j=0; j<17; j++) {
-				if(j>=7 && j<=9) {
+			for(int j=0; j<19; j++) {
+				if(j>=8 && j<=10) {
 					out.println("*");
 				}else {
 					out.println("_");
@@ -28,8 +28,8 @@
 			}
 		}
 		if(i==2 || i==10) {
-			for(int j=0; j<17; j++) {
-				if(j>=6 && j<=10) {
+			for(int j=0; j<19; j++) {
+				if(j>=7 && j<=11) {
 					out.println("*");
 				}else {
 					out.println("_");
@@ -37,13 +37,13 @@
 			}
 		}
 		if(i==3 || i==9) {
-			for(int j=0; j<17; j++) {
+			for(int j=0; j<19; j++) {
 				out.println("*");
 				}
 		}
 		if(i==4 || i==8) {
-			for(int j=0; j<17; j++) {
-				if(j>=1 && j<=15) {
+			for(int j=0; j<19; j++) {
+				if(j>=1 && j<=17) {
 					out.println("*");
 				}else {
 					out.println("_");
@@ -51,8 +51,8 @@
 			}
 		}
 		if(i==5 || i==7) {
-			for(int j=0; j<17; j++) {
-				if(j>=2 && j<=14) {
+			for(int j=0; j<19; j++) {
+				if(j>=2 && j<=16) {
 					out.println("*");
 				}else {
 					out.println("_");
@@ -60,8 +60,8 @@
 			}
 		}
 		if(i==6) {
-			for(int j=0; j<17; j++) {
-				if(j>=3 && j<=13) {
+			for(int j=0; j<19; j++) {
+				if(j>=3 && j<=15) {
 					out.println("*");
 				}else {
 					out.println("_");

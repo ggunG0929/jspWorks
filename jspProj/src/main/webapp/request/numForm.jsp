@@ -38,7 +38,7 @@
 				</select>
 			</td>
 		</tr>
-	<%	for(int i=0; i<10; i++) { %>
+	<%	for(int i=0; i<cnt; i++) { %>
 		<tr>
 			<td><%=i+1 %></td>
 			<td><input type="text" name="no" value="<%=(int)(Math.random()*100)+10 %>" /></td>

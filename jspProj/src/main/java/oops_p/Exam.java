@@ -3,8 +3,7 @@ package oops_p;
 import java.util.Arrays;
 
 public class Exam {
-	
-	String name,grade;
+	String name, grade;
 	int [] jum;
 	int tot, avg, rank;
 	

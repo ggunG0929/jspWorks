@@ -3,8 +3,6 @@ package excercise;
 import java.util.ArrayList;
 
 public class Stud {
-	
-	
 	String name;
 	int kor, eng, mat, tot, avg, rank;
 	public Stud(String name, int kor, int eng, int mat) {
@@ -13,7 +11,7 @@ public class Stud {
 		this.kor = kor;
 		this.eng = eng;
 		this.mat = mat;
-		
+
 		calc();
 	}
 	

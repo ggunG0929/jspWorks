@@ -25,6 +25,6 @@
 <h1>numReg</h1>
 no: <%=request.getParameter("no") %><br>
 noArr: <%=Arrays.toString(noArr) %><br>
-sum: <%=sum %>
+sum(짝수만): <%=sum %>
 </body>
 </html>

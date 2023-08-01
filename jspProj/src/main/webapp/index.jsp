@@ -10,10 +10,10 @@
 <h1>jspProj입니다.</h1>
 <h2>basic</h2>
 <a href="basic/First">서블릿진입</a>
-<a href="basic/03_third.jsp">03_third</a>
-<a href="basic/04_page.jsp">04_page</a>
-<a href="basic/05_config.jsp">05_config</a>
-<a href="basic/06_pageContext.jsp">06_pageContext</a>
+<a href="basic/03_third.jsp">03third</a>
+<a href="basic/04_page.jsp">04page</a>
+<a href="basic/05_config.jsp">05config</a>
+<a href="basic/06_pageContext.jsp">06pageContext</a>
 
 <h2>exception</h2>
 <a href="err/aaa.jsp">try~catch</a>
@@ -25,6 +25,7 @@
 <h2>request</h2>
 <a href="request/numForm.jsp">숫자입력</a>
 <a href="request/examForm.jsp">점수입력</a>
+<a href="request/examForm2.jsp">점수입력2</a>
 
 <h2>exercise</h2>
 <a href="exercise/369.jsp">369</a>

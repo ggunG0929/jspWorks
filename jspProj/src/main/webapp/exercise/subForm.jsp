@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	int cnt = 5;
-	if(request.getParameter("cnt")!=null) {
-		cnt = Integer.parseInt(request.getParameter("cnt"));
-	}
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +16,7 @@
 			<td>영어</td>
 			<td>수학</td>
 		</tr>
+		<!-- 임의로 학생이름, 국어, 영어, 수학 점수를 다섯개 입력, 불필요한 부분 삭제 -->
 	<%	for(int i=0; i<5; i++) { %>
 		<tr>
 			<td><input type="text" name="sname" value="<%="학생" + (i+1) %>"/></td>

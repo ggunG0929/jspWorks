@@ -15,7 +15,7 @@
 	Random r = new Random();
 	String [] nameList = "한가인,두가인,삼가인,사가인,오가인".split(",");
 %>
-<form action="examReg1.jsp">
+<form action="examReg3.jsp">
 	<table>
 		<tr>
 			<td>이름</td>
