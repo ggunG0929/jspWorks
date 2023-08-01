@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>examReg-자바연결</title>
+<script type="text/javascript">
+	function sortChange(){
+	}
+</script>
 </head>
 <body>
 <h1>examReg-자바연결</h1>
@@ -19,6 +23,16 @@
 	String [] jumsu = request.getParameterValues("jumsu");
 	// jumsu = [학생1sub1, 학생1sub2, 학생1sub3,
 	//			학생2sub1, 학생2sub2, 학생2sub3, ...]
+	
+	int sort = -1;
+	if(request.getParameter("sort")!=null) {
+		String s = request.getParameter("sort");
+		for(int i=0; i<title.length; i++) {
+			if(s.equals(title[i])) {
+				sort = i;
+			}
+		}
+	}
 
 /* 	// jumsu를 이중배열 jum2로 -- 이중배열을 거치지 않고 바로 연산으로 범위를 정해 java로 보낼 수 있지 않을까?
 	int[][] jum2 = new int[pname.length][title.length];
@@ -64,6 +78,15 @@
 %>
 	<table border="" style="border-collapse: collapse">
 		<tr>
+			<td colspan="<%=(title.length)*2+5 %>">정렬기준: <select name="sort" id="sortSelect" onchange="sortChange()">
+				<option>전과목</option>
+				<%	for(int i=0; i<title.length; i++) { %>
+				<option<% if (i==sort) { %> selected<% } %>><%=title[i] %></option>
+				<% } %>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<td>이름 과목</td>
 			<% for(int i=0; i<title.length; i++) { %>
 				<td><%=title[i] %></td>
@@ -86,7 +109,7 @@
 	<% } %> --%>
 	
 		<!-- 등수기준으로 출력 -->
-		<%	
+<%-- 		<%	
 		for(int i=0; i<pname.length; i++) {
 			for(int k=0; k<pname.length; k++) {
 				// 학생들 중 i에 따라 1등부터 pname.length+1등인 인덱스를 갖고 있는 k인덱스를 찾아내서 출력
@@ -106,6 +129,46 @@
 				}
 			}
 		} 
+		%> --%>
+		<!-- sort기준으로 출력 -->
+		<%	
+		for(int i=0; i<pname.length; i++) {
+			for(int k=0; k<pname.length; k++) {
+		%>
+		<%	
+				if(sort == -1) {
+					if(Students[k].getRank()==i+1) { 
+		%>
+					<tr>
+						<td><%=Students[k].getName() %></td>
+						<%	for(int j=0; j<title.length; j++) { %>
+							<!-- 과목별 점수 출력 -->
+			                <td><%= Students[k].getJum()[j] %></td>
+			                <!-- 과목별 등수 출력 -->
+			                <td><%= Students[k].getJumrank()[j] %></td>
+		        	    <% } %>
+						<%=Students[k].toString() %>
+					</tr>
+		<%			
+					}
+				}else{
+					if(Students[k].getJumrank()[sort]==i+1) {
+		%>			
+					<tr>
+						<td><%=Students[k].getName() %></td>
+						<%	for(int j=0; j<title.length; j++) { %>
+							<!-- 과목별 점수 출력 -->
+			                <td><%= Students[k].getJum()[j] %></td>
+			                <!-- 과목별 등수 출력 -->
+			                <td><%= Students[k].getJumrank()[j] %></td>
+		        	    <% } %>
+						<%=Students[k].toString() %>
+					</tr>
+		<% 
+					}
+				}
+			}
+		}
 		%>
 	</table>
 </body>
