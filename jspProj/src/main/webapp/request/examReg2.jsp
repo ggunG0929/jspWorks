@@ -20,7 +20,7 @@
 	// jumsu = [학생1sub1, 학생1sub2, 학생1sub3,
 	//			학생2sub1, 학생2sub2, 학생2sub3, ...]
 
-	// jumsu를 이중배열 jum2로 -- 이중배열을 거치지 않고 바로 연산으로 범위를 정해 java로 보낼 수 있지 않을까? 일단 나중에 
+/* 	// jumsu를 이중배열 jum2로 -- 이중배열을 거치지 않고 바로 연산으로 범위를 정해 java로 보낼 수 있지 않을까?
 	int[][] jum2 = new int[pname.length][title.length];
 	int index = 0;
 	for(int i=0; i<pname.length; i++) {
@@ -36,7 +36,19 @@
     		jum[j] = jum2[i][j];	// The local variable jum may not have been initialized
     	}
         Students[i] = new Exam2(pname[i], jum);
-    }
+    } */
+
+    // jumsu에서 해당학생의 점수만 jum으로
+	Exam2[] Students = new Exam2[pname.length];	
+	int index = 0;
+	for(int i=0; i<pname.length; i++) {
+	    int[] jum = new int[title.length]; // 초기화
+    	for(int j=0; j<title.length; j++) {
+    		// jumsu를 학생(i)마다 과목(j)순서대로 과목 수 크기의 배열로 저장
+	        jum[j] = Integer.parseInt(jumsu[index++]);
+	    }
+	    Students[i] = new Exam2(pname[i], jum);
+	}
     // 등수 연산 메소드 호출
     for (Exam2 student : Students) {
         student.rankCalc(Students);
