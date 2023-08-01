@@ -4,8 +4,8 @@
 <%
 	// 과목 수
 	int s = 3;
-	// s 값을 가져올 수 있다면
-	if(request.getParameter("s")!=null) {
+	//s 값을 가져올 수 있다면(값이 있고 +비어있지 않으면) - 학생 수 변경시 s값이 비어있어서 형변환실패 오류가 생김
+	if(request.getParameter("s")!=null && !request.getParameter("s").isEmpty()) {	// java.lang.NumberFormatException: For input string: ""
 		// s 값을 정수형으로 가져옴
 		s = Integer.parseInt(request.getParameter("s"));
 	}
