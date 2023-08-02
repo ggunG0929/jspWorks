@@ -1,4 +1,4 @@
-package oops_p;
+package excercise;
 
 public class Exam2 {
 	// 필드 선언
@@ -24,6 +24,7 @@ public class Exam2 {
 			tot += i;
 		}
 		avg = (double)tot/jum.length;
+		// charAt은 char를 반환. 뒤에 +""를 합해주면서 문자열이 되어 String 자료형 가능
 		grade = "가가가가가가양미우수수".charAt((int)(avg/10))+"";
 	}
 

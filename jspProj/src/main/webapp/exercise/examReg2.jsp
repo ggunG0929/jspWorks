@@ -1,4 +1,4 @@
-<%@page import="oops_p.Exam2"%>
+<%@page import="excercise.Exam2"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -22,8 +22,8 @@
 <title>examForm</title>
 <script type="text/javascript">
 	function sChange(){
-		var s = document.getElementById("s");
-		var intS = parseInt(s.value);
+		var s = document.getElementById("subject").value;
+		var intS = parseInt(s);
 		// s값이 문자인 경우 or s값이 0 이하인 경우
 		if(isNaN(intS) || intS<=0) {
 			alert("과목 수는 1 이상의 숫자여야 합니다.");
@@ -48,7 +48,8 @@
 <form action="examReg2.jsp" name="examForm">
 	<table>
 		<tr>
-			<td>과목 수: <input type="text" name="s" id="s" placeholder="<%=s %>" style="width: 40px"><input type="button" onclick="sChange()" value="확인"></td>
+			<td>과목 수: <input type="text" name="s" id="subject" placeholder="<%=s %>" style="width: 30px">
+				<input type="button" onclick="sChange()" value="확인"></td>
 			<td>학생 수: <select name="n" onchange="nChange()">
 				<%	
 					for(int i=5; i<=30; i+=5) { 

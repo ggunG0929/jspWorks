@@ -37,6 +37,6 @@
 <a href="exercise/star.jsp">star</a>
 <a href="exercise/subForm.jsp">sum</a>
 <a href="exercise/examForm2.jsp">성적표2</a>
-<a href="exercise/idnumber.jsp">회원가입구분</a>
+<a href="exercise/idinput.jsp">주민번호redirect</a>
 </body>
 </html>
