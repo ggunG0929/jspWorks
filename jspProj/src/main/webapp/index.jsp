@@ -27,10 +27,16 @@
 <a href="request/examForm.jsp">성적표1</a>
 <a href="request/examForm3.jsp">성적표3</a>
 
+<h2>view</h2>
+<a href="redirect/a.jsp?nick=ccc">redirect</a>
+<a href="forward/a.jsp?nick=ccc">forward</a>
+<a href="include/a.jsp?nick=ccc">include</a>
+
 <h2>exercise</h2>
 <a href="exercise/369.jsp">369</a>
 <a href="exercise/star.jsp">star</a>
 <a href="exercise/subForm.jsp">sum</a>
 <a href="exercise/examForm2.jsp">성적표2</a>
+<a href="exercise/idnumber.jsp">회원가입구분</a>
 </body>
 </html>

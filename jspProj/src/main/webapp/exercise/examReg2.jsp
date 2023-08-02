@@ -8,6 +8,7 @@
 <title>examReg-자바연결</title>
 <script type="text/javascript">
 	function sortChange(){
+		// session이 필요함. sort 정보를 보내면 이전 폼에서 가져온 정보가 날아감
 	}
 </script>
 </head>
@@ -24,6 +25,7 @@
 	// jumsu = [학생1sub1, 학생1sub2, 학생1sub3,
 	//			학생2sub1, 학생2sub2, 학생2sub3, ...]
 	
+	// 정렬
 	int sort = -1;
 	if(request.getParameter("sort")!=null) {
 		String s = request.getParameter("sort");
@@ -77,6 +79,7 @@
     }
 %>
 	<table border="" style="border-collapse: collapse">
+		<!-- sort 기준 선택부분 -->
 		<tr>
 			<td colspan="<%=(title.length)*2+5 %>">정렬기준: <select name="sort" id="sortSelect" onchange="sortChange()">
 				<option>전과목</option>
@@ -86,6 +89,7 @@
 				</select>
 			</td>
 		</tr>
+		<!-- thead -->
 		<tr>
 			<td>이름 과목</td>
 			<% for(int i=0; i<title.length; i++) { %>
@@ -97,6 +101,8 @@
 			<td>등급</td>
 			<td>전체등수</td>
 		</tr>
+		
+		<!-- tbody -->
 		
 		<!-- 입력한 순서대로 출력 -->
 <%-- 	<% for(Exam2 student : Students) { %>
@@ -130,6 +136,7 @@
 			}
 		} 
 		%> --%>
+		
 		<!-- sort기준으로 출력 -->
 		<%	
 		for(int i=0; i<pname.length; i++) {
