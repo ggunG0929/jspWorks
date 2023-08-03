@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+		<!-- Java>Libraries>JRE>java.sql -->
+		<!-- Java>Libraries>webapp>mysql -->
+		<!-- driver 오타가 나서 url에서 오류가 남. 파일을 읽어보니 resource password부터 나옴 필드가 거꾸로.. -->
+	<Resource
+		name="mvc322"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/db322"
+		username="user322"
+		password="12345678"
+	/>
+</Context>

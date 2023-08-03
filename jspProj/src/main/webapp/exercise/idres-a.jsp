@@ -18,6 +18,13 @@
 	// 주민번호 뒤1자리
 	int nation = Integer.parseInt(request.getParameter("nation"));
 	
+	// birth의 yy를 yyyy로
+	if((nation-1)%4/2 == 0) {
+		birth = "19" + birth;
+	}else {
+		birth = "20" + birth;
+	}
+
 	// 성별
 	String gender;
 	if(nation%2==0) {
@@ -29,17 +36,10 @@
 	// 오늘
 	LocalDate now = LocalDate.now();
 	// 포맷팅
-	DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 	// 포맷팅 형식인 오늘
-	String today = now.format(format);
+	String today = now.format(formatter);
 	//System.out.println(today);
-	
-	// birth의 yy를 yyyy로
-	if((nation-1)%4/2 == 0) {
-		birth = "19" + birth;
-	}else {
-		birth = "20" + birth;
-	}
 	
 	// 연산을 위해 인수형으로
 	int itoday = Integer.parseInt(today);
@@ -48,6 +48,7 @@
 	// HTTP 응답 헤더 [Location](이)가 유효하지 않은 값이므로 응답에서 제거되었습니다.
 	// java.lang.IllegalArgumentException: 유니코드 문자는 허용 범위 바깥에 있으므로 인코딩될 수 없습니다.
 	// 정보 전달을 위해 인코딩
+	// 배열은 인코딩이 안됨
 	String ename = URLEncoder.encode(name, "UTF-8");
 	String ebirth = URLEncoder.encode(birth, "UTF-8");
 	String egender = URLEncoder.encode(gender, "UTF-8");
@@ -64,10 +65,6 @@
 			response.sendRedirect("idres-k.jsp?ename="+ename+"&ebirth="+ebirth+"&egender="+egender);
 		}
 	}
-
-	String y = birth.substring(0, 4);
-	String m = birth.substring(4, 6);
-	String d = birth.substring(6, 8);
 %>
 <h1>일반 회원가입폼</h1>
 <form action="?">
@@ -87,16 +84,16 @@
 		<tr>
 			<td>생년월일</td>
 			<td>
-				 <input type="text" value="<%=y %>" />년
-				 <input type="text" value="<%=m %>" />월
-				 <input type="text" value="<%=d %>" />일
+				 <input type="text" value="<%=birth.substring(0, 4) %>" style="width: 40px" />년
+				 <input type="text" value="<%=birth.substring(4, 6) %>" style="width: 20px" />월
+				 <input type="text" value="<%=birth.substring(6, 8) %>" style="width: 20px" />일
 			 </td>
 		</tr>
 		<tr>
 			<td>성별</td>
 			<td>
-				 <input type="radio" <% if(gender.equals("여")){ %>checked<% } %>/>여
-				 <input type="radio" <% if(gender.equals("남")){ %>checked<% } %>/>남
+				 <input type="radio"<% String fchk = gender.equals("여") ? "checked" : "disabled"; %><%=fchk %>/>여
+				 <input type="radio"<% String mchk = gender.equals("남") ? "checked" : "disabled"; %><%=mchk %>/>남
 			</td>
 		</tr>
 		<tr>
@@ -172,7 +169,7 @@
 	// birth 배열을 - 로 묶어줌: yyyy-MM-dd
 	String birthStr = String.join("-", birth);
 	// 19년전오늘.이전인지(생일보다도birth를 date로 형변환) - true: 미성년자(sv=2: 주민번호 뒷첫자리 3) false: 성인(sv=0: 주민번호 뒷첫자리 1)
-	if( today.before(new SimpleDateFormat("yyyy-MM-dd").parse(birthStr))){
+	if(today.before(new SimpleDateFormat("yyyy-MM-dd").parse(birthStr))){
 		sv = 2;
 	}else{
 		sv = 0;
@@ -188,6 +185,11 @@
 	// pname을 url 주소로 전달하기 위해 인코딩
 	String ppname = URLEncoder.encode(pname,"UTF-8");
 	//response.sendRedirect(goUrl+".jsp?ppname="+ppname+"&year="+1111);
+	
+	
+	
+	
+	
 %>
 --%>
   
@@ -198,12 +200,16 @@
 			<td>생년월일</td>
 			<td>
 			<input type="text" name="year"  value="<%=request.getParameter("year") %>" />-
-			<input type="text" name="month"  value="" />-
-			<input type="text" name="day"  value="" /></td>
+			<input type="text" name="month"  value="<%=request.getParameter("month") %>" />-
+			<input type="text" name="day"  value="<%=request.getParameter("day") %>" /></td>
 		</tr>
 		<tr>
 			<td>이름</td>
 			<td><input type="text" name="pname" value="<%=request.getParameter("ppname") %>" /></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+			<input type="submit" value="가입" /></td>
 		</tr>
 	</table>
 </form>
