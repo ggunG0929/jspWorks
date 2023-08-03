@@ -4,11 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 // 모델링
+// DTO(Data Transfer Object):
+// 일반적으로 필드와 필드에 접근하기 위한 Getter와 Setter 메서드로 구성
+// 데이터의 전송과 변환을 담당, 데이터의 저장이나 로직 처리를 하지 않음
 public class BoardDTO {
 	
 	String title, pname, pw, upfile, content;
 	Date reg_date;
 	int id, cnt, seq, lev, gid;
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd(E) hh:mm");
 	
 	// 우클>src>getter,setter
@@ -43,6 +47,7 @@ public class BoardDTO {
 	public String getContent() {
 		return content;
 	}
+	// 게시글 내용(content)에 엔터키 적용
 	public String getContentBr() {
 		return content.replaceAll("\n", "<br>");
 	}
@@ -53,6 +58,7 @@ public class BoardDTO {
 	public Date getReg_date() {
 		return reg_date;
 	}
+	// 작성일(reg_date)에 포맷팅 적용
 	public String getReg_dateStr() {
 		return sdf.format(reg_date);
 	}

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	// 비디테일 클래스에서 받아온 메인데이터
 	BoardDTO dto = (BoardDTO)request.getAttribute("mainData");
 %>
 <table border="">
