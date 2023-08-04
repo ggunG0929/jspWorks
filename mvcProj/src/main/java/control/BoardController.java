@@ -30,13 +30,17 @@ public class BoardController extends HttpServlet {
 				);
 		//System.out.println(serviceStr);
 		try {
-			// 보드서비스타입의 서비스 객체를 생성 = (보드서비스타입으로 형변환)ser_p패키지의 서비스str이름인 클래스 객체를 가져오고. 기본 생성자를 호출
+			// 한글 깨지지 않게
+			request.setCharacterEncoding("UTF-8");
+			
+			// 메인페이지라는 필드로 uri 중 board/ 다음을 지정해서 넘겨줌
+			// redirect가 필요해지면서 보드서비스 보다 위로 자리를 옮겨줌
+			request.setAttribute("mainPage", serviceStr);
+			
+			// 보드서비스타입의 서비스 객체(인스턴스)를 생성 = (보드서비스타입으로 형변환)ser_p패키지의 서비스str이름인 클래스 객체를 가져오고. 기본 생성자를 호출
 			BoardService service = (BoardService)Class.forName("ser_p."+serviceStr).newInstance();	// surround with try catch
 			// execute: 실행하다 수행하다	// 보드서비스를 통해 execute메서드 호출, 각 클래스에서 재정의 된 execute가 실행됨
 			service.execute(request, response);
-			
-			// 메인페이지라는 필드로 uri 중 board/ 다음을 지정해서 넘겨줌 
-			request.setAttribute("mainPage", serviceStr);
 			
 			// RequestDispatcher인터페이스 - 두가지 메서드를 제공함 include와 forward
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/views/template.jsp");

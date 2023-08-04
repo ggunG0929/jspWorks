@@ -18,7 +18,7 @@
 		<td><%=i %></td>
 		<td><a href="BDetail?id=<%=dto.getId() %>"><%=dto.getTitle() %></a></td>
 		<td><%=dto.getPname() %></td>
-		<td><%=dto.getReg_date() %></td>
+		<td><%=dto.getReg_dateStr() %></td>
 		<td><%=dto.getCnt() %></td>
 	</tr>
 	<% } %>

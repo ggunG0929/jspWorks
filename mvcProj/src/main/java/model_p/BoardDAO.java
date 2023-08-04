@@ -36,7 +36,8 @@ public class BoardDAO {
 	
 	// 글목록
 	public ArrayList<BoardDTO> list() {
-		sql = "select * from board";
+		// 내림차순으로
+		sql = "select * from board order by id desc";
 		// 배열리스트 생성
 		ArrayList<BoardDTO> res = new ArrayList<>();
 		try {
@@ -72,7 +73,7 @@ public class BoardDAO {
 		return res;
 	}
 	
-	// 글 상세보기(글아이디)
+	// 글 상세보기(글 아이디)
 	public BoardDTO detail(int id) {
 		sql = "select * from board where id = ?";
 		BoardDTO dto = null;
@@ -104,7 +105,118 @@ public class BoardDAO {
 		// id로 검색한 게시물 반환
 		return dto;
 	}
+
+	// 조회수 올리기(글 아이디)
+	public void addCount(int id) {
+		sql = "update board set cnt = cnt+1 where id = ?";
+		BoardDTO dto = null;
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, id);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
 	
+	// 글 작성하기(게시글모델)
+	public void write(BoardDTO dto) {
+		// 작성하자마자 글이 뜨도록 했으므로 조회수 초기값을 -1로 해서 확인하는 순간 조회수가 0이 되도록
+		sql = "insert into board (title, pname, pw, upfile, content, seq, lev, gid, cnt, reg_date) "
+				+ "values (?, ?, ?, ?, ?, 0, 0, 0, -1, sysdate())";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getTitle());
+			ptmt.setString(2, dto.getPname());
+			ptmt.setString(3, dto.getPw());
+			ptmt.setString(4, dto.getUpfile());
+			ptmt.setString(5, dto.getContent());
+			ptmt.executeUpdate();
+			
+			// 내가 쓴 글을 확인하기 위해 내가 쓴 글 id를 받아와야함
+			ptmt.close();
+			
+			sql = "select max(id) from board";
+			
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			rs.next();
+			dto.setId(rs.getInt(1));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
+	
+	// 글 삭제하기(게시글모델)
+	public int delete(BoardDTO dto) {
+		sql = "delete from board where id = ? and pw = ?";
+		int res = 0;
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, dto.getId());
+			ptmt.setString(2, dto.getPw());
+			res = ptmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		// 1이면 성공, 0이면 실패
+		return res;
+	}
+	
+	// 글 삭제시 비번체크(게시글모델)
+	public BoardDTO idPwChk(BoardDTO dto) {
+		sql = "select * from board where id = ? and pw = ?";
+		BoardDTO res = null;
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, dto.getId());
+			ptmt.setString(2, dto.getPw());
+			rs = ptmt.executeQuery();
+			// ResultSet에 레코드가 있다면
+			if(rs.next()) {
+				// dto-게시물. 게시물의 필드들을 database의 값을 가져와 세팅
+				res = new BoardDTO();
+				res.setId(rs.getInt("id"));
+				res.setUpfile(rs.getString("upfile"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		// id로 검색한 게시물 반환
+		return res;
+	}
+
+	// 글 수정하기(게시글모델)
+	public int modify(BoardDTO dto) {
+		int res = 0;
+		sql = "update board set title= ? , pname = ?, upfile = ?, content = ? where id = ? and pw = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getTitle());
+			ptmt.setString(2, dto.getPname());
+			ptmt.setString(3, dto.getUpfile());
+			ptmt.setString(4, dto.getContent());
+			ptmt.setInt(5, dto.getId());
+			ptmt.setString(6, dto.getPw());
+			res = ptmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return res;
+	}
+	
+	// 데이터베이스 접속 종료
 	public void close() {
 		// 뭔가 담겨있다면 끝을 내줘라
 		if(rs!=null) try {rs.close();} catch (Exception e) {}

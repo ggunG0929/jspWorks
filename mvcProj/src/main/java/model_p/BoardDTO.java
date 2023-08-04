@@ -2,6 +2,7 @@ package model_p;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 // 모델링
 // DTO(Data Transfer Object):
@@ -37,9 +38,25 @@ public class BoardDTO {
 		this.pw = pw;
 	}
 	
+	/*
+	 * public String getUpfile() { return upfile; }
+	 */
 	public String getUpfile() {
+		if(upfile==null
+				|| upfile.trim().equals("")
+				|| upfile.trim().equals("null")) {
+			upfile = "";
+		}
 		return upfile;
 	}
+	
+	public boolean isImg() {
+		// Pattern.matches("찾을 글자", "원본 글")
+		// ".*[.](jpg|bmp|png|gif)" : [.] 기호 .을 의미 그 앞에는 .(모든것)*(몇글자)[.](jpg나 bmp나 무엇이든)
+		boolean res = Pattern.matches(".*[.](jpg|bmp|png|gif)", getUpfile().toLowerCase());
+		return res;
+	}
+	
 	public void setUpfile(String upfile) {
 		this.upfile = upfile;
 	}
