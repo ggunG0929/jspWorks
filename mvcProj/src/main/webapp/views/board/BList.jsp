@@ -10,7 +10,7 @@
 		<td width="200px">작성일</td>
 		<td width="50px">조회수</td>
 	</tr>
-	<!-- 비리스트 클래스에서 넘겨받은 메인데이터 출력 -->
+	<!-- 같은 이름의 클래스에서 넘겨받은 메인데이터 출력 -->
 	<% int i=0;
 	for(BoardDTO dto : (ArrayList<BoardDTO>)request.getAttribute("mainData")) {
 		i++; %>

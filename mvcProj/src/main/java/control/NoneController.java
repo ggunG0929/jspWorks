@@ -2,14 +2,13 @@ package control;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+//서블릿(경로 /noneJsp/ 뒤에 뭐가 붙던 - 파일다운로드 클릭시)
 @WebServlet("/noneJsp/*")
 public class NoneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +21,6 @@ public class NoneController extends HttpServlet {
 		String serviceStr = request.getRequestURI().substring(
 				(request.getContextPath()+"/noneJsp/").length()
 				);
-		System.out.println(serviceStr);
 		
 		try {
 			BoardService service = (BoardService)Class.forName("ser_p."+serviceStr).newInstance();

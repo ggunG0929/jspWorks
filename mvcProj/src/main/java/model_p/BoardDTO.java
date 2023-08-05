@@ -42,6 +42,7 @@ public class BoardDTO {
 	 * public String getUpfile() { return upfile; }
 	 */
 	public String getUpfile() {
+		// 파일이 없거나 공백이거나 null이라는 문자라면 공백으로 통일시킴
 		if(upfile==null
 				|| upfile.trim().equals("")
 				|| upfile.trim().equals("null")) {
@@ -50,6 +51,7 @@ public class BoardDTO {
 		return upfile;
 	}
 	
+	// 파일이 이미지일 때는 true를 반환
 	public boolean isImg() {
 		// Pattern.matches("찾을 글자", "원본 글")
 		// ".*[.](jpg|bmp|png|gif)" : [.] 기호 .을 의미 그 앞에는 .(모든것)*(몇글자)[.](jpg나 bmp나 무엇이든)
@@ -118,6 +120,7 @@ public class BoardDTO {
 		this.gid = gid;
 	}
 	
+	// 우클>src>generate toString
 	@Override
 	public String toString() {
 		return "BoardDTO [title=" + title + ", pname=" + pname + ", pw=" + pw + ", upfile=" + upfile + ", content="
