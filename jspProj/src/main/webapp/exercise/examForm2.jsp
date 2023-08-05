@@ -28,13 +28,15 @@
 		if(isNaN(intS) || intS<=0) {
 			alert("과목 수는 1 이상의 숫자여야 합니다.");
 			s.select();
-		}else {			
+		}else {
 			examForm.action="?"
 			examForm.submit();	
 		}
 	}
 	function nChange(){
 		examForm.action="?"
+		// 과목수를 변경 후 학생수 변경시 과목수가 초기값 3으로 돌아가서 이전값 유지하도록 추가
+		document.getElementById("subject").value = <%=s %>;
 		examForm.submit();	
 	}
 </script>

@@ -8,13 +8,16 @@
 <title>examReg-자바연결</title>
 <script type="text/javascript">
 	function sortChange(){
-		// session이 필요함. sort 정보를 보내면 이전 폼에서 가져온 정보가 날아감
+        sortForm.submit();
 	}
 </script>
 </head>
 <body>
 <h1>examReg-자바연결</h1>
 <%
+	// request에서 한글 안깨지도록 인코딩
+	request.setCharacterEncoding("UTF-8");
+
 	String [] pname = request.getParameterValues("pname");
 	// pname = ["학생(i+1)"]
 	
@@ -27,8 +30,11 @@
 	
 	// 정렬
 	int sort = -1;
+	String s = null;
+	// 영어와 숫자는 잘 불러와지는데 한글은 깨져서 비교가 어려워지는 문제 발생
+	// request.setCharacterEncoding("UTF-8")추가로 해결
 	if(request.getParameter("sort")!=null) {
-		String s = request.getParameter("sort");
+		s = request.getParameter("sort");
 		for(int i=0; i<title.length; i++) {
 			if(s.equals(title[i])) {
 				sort = i;
@@ -78,6 +84,7 @@
 	    }
     }
 %>
+<form id="sortForm" method="post" action="">
 	<table border="" style="border-collapse: collapse">
 		<!-- sort 기준 선택부분 -->
 		<tr>
@@ -178,5 +185,6 @@
 		}
 		%>
 	</table>
+</form>
 </body>
 </html>
