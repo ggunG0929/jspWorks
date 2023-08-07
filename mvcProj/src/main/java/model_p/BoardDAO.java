@@ -25,7 +25,9 @@ public class BoardDAO {
 		try {
 			// javax.naming.InitialContext 클래스: 네이밍 시스템에서 객체를 찾기 위한 기본 컨텍스트(Initial Context)를 생성
 			Context init = new InitialContext();
-			// 연결관리 커넥션제공 객체 ds = InitialContext 객체의. lookup()메서드를 이용하여 이름으로 등록된 DataSource 객체를 찾음("java:/comp/env/" 네임스페이스에 등록된 "mvc322"라는 이름의 database)
+			// 연결관리 커넥션제공 객체 ds = InitialContext 객체의. lookup()메서드를 이용하여 이름으로 등록된 DataSource 객체를 찾음
+			// ("java(자바):/comp(컴파일)/env(환경)/mvc322(이름)")
+			// 네임스페이스(META-INF>context.xml>resource name)에 등록된 "mvc322"라는 이름의 database)
 			DataSource ds = (DataSource)init.lookup("java:/comp/env/mvc322");
 			// DataSource 객체로부터 db 커넥션을 얻어옴
 			con = ds.getConnection();

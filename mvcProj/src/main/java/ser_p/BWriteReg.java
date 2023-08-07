@@ -21,6 +21,7 @@ public class BWriteReg implements BoardService {
 		try {
 			// MultipartRequest: cos.jar를 통해 쓸 수 있는 클래스
 			// 클라이언트에서 전송된 멀티파트요청(파일 업로드 또는 폼 데이터에 파일과 일반 텍스트 데이터가 혼합된 요청)을 처리
+			// 데이터베이스에 직접 파일을 올리기에 부담이 크니 따로 폴더를 만들어서 저장시키고 이름으로 읽어옴
 			MultipartRequest mr = new MultipartRequest(
 						request, 
 						path,

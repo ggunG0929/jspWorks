@@ -48,7 +48,7 @@ public class BModifyReg implements BoardService {
 			String msg = "비밀번호가 일치하지 않습니다.";
 			String goUrl = "BModifyForm?id="+dto.getId();
 			
-			if(new BoardDAO().modify(dto)>0) {	// id, pw가 일치한다면
+			if(new BoardDAO().modify(dto)>0) {	// id, pw가 일치한다면 1을 return
 				// id, pw 검사 성공값 설정
 				msg = "수정되었습니다.";
 				goUrl = "BDetail?id="+dto.getId();

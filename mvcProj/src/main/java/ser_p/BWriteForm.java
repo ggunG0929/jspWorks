@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import control.BoardService;
-import model_p.BoardDAO;
 
 //보드서비스 인터페이스 상속 - execute 재정의 의무
 public class BWriteForm implements BoardService {

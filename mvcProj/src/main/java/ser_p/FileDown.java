@@ -18,6 +18,10 @@ public class FileDown implements BoardService {
 		// 파일이름을 가져옴
 		String fName = request.getParameter("fName");
 
+//		String path = request.getRealPath("up");
+		// 가상화된 주소가 떠버림 C:\\green_project\\jspWorks\\.metadata\\.plugins\\
+		// org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\mvcProj\\up
+//		System.out.println(path);
 		// 실제 path를 부여
 		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
 
