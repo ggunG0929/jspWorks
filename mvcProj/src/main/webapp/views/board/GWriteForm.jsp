@@ -1,10 +1,10 @@
-<%@page import="model_p.PageData"%>
+<%@page import="model_p.PageData2"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	PageData pd = (PageData)request.getAttribute("pd");
+	PageData2 pd = (PageData2)request.getAttribute("pd");
 %>
-<form action="BWriteReg" method="post" enctype="multipart/form-data">
+<form action="GWriteReg" method="post" enctype="multipart/form-data">
 	<table border="">
 		<tr>
 			<td width="100px">제목</td>
@@ -24,13 +24,13 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea name="content" id="" cols="30" rows="10"></textarea></td>
+			<td><textarea name="description" id="" cols="30" rows="10"></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value="글쓰기">
 				<input type="reset" value="초기화">
-				<a href="BList?page=<%=pd.page %>">목록으로</a>
+				<a href="GList?page=<%=pd.page %>">목록으로</a>
 			</td>
 		</tr>
 	</table>

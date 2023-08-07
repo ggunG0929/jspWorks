@@ -1,20 +1,20 @@
-<%@page import="model_p.PageData"%>
-<%@page import="model_p.BoardDTO"%>
+<%@page import="model_p.PageData2"%>
+<%@page import="model_p.GalleryDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	PageData pd = (PageData)request.getAttribute("pd");
+	PageData2 pd = (PageData2)request.getAttribute("pd");
 	//같은 이름의 클래스에서 넘겨받은 메인데이터 출력
-	BoardDTO dto = (BoardDTO)request.getAttribute("mainData");
+	GalleryDTO dto = (GalleryDTO)request.getAttribute("mainData");
 %>
 <script>
 	function fileDel() {
-		myFrm.action="BFileDelete?page=<%=pd.page %>"
+		myFrm.action="GFileDelete?page=<%=pd.page %>"
 		myFrm.submit()
 	}
 </script>
 <!-- 파일이 존재하므로 enctype="multipart/form-data" -->
-<form name="myFrm" action="BModifyReg?page=<%=pd.page %>" method="post" enctype="multipart/form-data">
+<form name="myFrm" action="GModifyReg?page=<%=pd.page %>" method="post" enctype="multipart/form-data">
 	<table border="">
 		<tr>
 		<!-- 수정 불가 -->
@@ -47,7 +47,6 @@
 			<td>암호</td>
 			<td><input type="password" name="pw"></td>
 		</tr>
-		<% if(dto.getSeq()==0) { %>
 		<tr>
 			<td>파일</td>
 			<td>
@@ -62,17 +61,16 @@
 			<% } %>
 			</td>
 		</tr>
-		<% } %>
 		<tr>
 			<td>내용</td>
-			<td><textarea name="content" id="" 
-				cols="30" rows="10"><%=dto.getContent() %></textarea></td>
+			<td><textarea name="description" id="" 
+				cols="30" rows="10"><%=dto.getDescription() %></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value="수정하기">
 				<input type="reset" value="초기화">
-				<a href="BDetail?id=<%=dto.getId() %>&page=<%=pd.page %>">뒤로</a>
+				<a href="GDetail?id=<%=dto.getId() %>&page=<%=pd.page %>">뒤로</a>
 			</td>
 		</tr>
 	</table>

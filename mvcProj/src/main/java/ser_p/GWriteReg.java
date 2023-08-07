@@ -1,7 +1,5 @@
 package ser_p;
 
-import java.io.File;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,19 +7,16 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import control.BoardService;
-import model_p.BoardDAO;
-import model_p.BoardDTO;
-import model_p.PageData;
+import model_p.GalleryDAO;
+import model_p.GalleryDTO;
 
 //보드서비스 인터페이스 상속 - execute 재정의 의무
-public class BModifyReg implements BoardService {
+public class GWriteReg implements BoardService {
 	
 	// execute 재정의
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// 실제 path를 부여
 		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
-		
-		PageData pd = (PageData)request.getAttribute("pd");
 		
 		try {
 			// MultipartRequest: cos.jar를 통해 쓸 수 있는 클래스
@@ -36,37 +31,22 @@ public class BModifyReg implements BoardService {
 					);
 			
 			// 게시글 모델 생성
-			BoardDTO dto = new BoardDTO();
-			// 글아이디 제목 작성자 비번 내용 파일 필드에서 정보를 가져와서 세팅
-			dto.setId(Integer.parseInt(mr.getParameter("id")));
+			GalleryDTO dto = new GalleryDTO();
+			// 제목 작성자 비번 내용 파일 필드에서 정보를 가져와서 세팅
 			dto.setTitle(mr.getParameter("title"));
 			dto.setPname(mr.getParameter("pname"));
 			dto.setPw(mr.getParameter("pw"));
-			dto.setContent(mr.getParameter("content"));
+			dto.setDescription(mr.getParameter("description"));
 			// 시스템에 저장된 파일이름을 가져옴
 			dto.setUpfile(mr.getFilesystemName("upfile"));
 			
-			// id, pw 검사
-			// id, pw 검사 실패값으로 초기화
-			String msg = "비밀번호가 일치하지 않습니다.";
-			String goUrl = "BModifyForm?id="+dto.getId()+"&page="+pd.page;
-			
-			if(new BoardDAO().modify(dto)>0) {	// id, pw가 일치한다면
-				// id, pw 검사 성공값 설정
-				msg = "수정되었습니다.";
-				goUrl = "BDetail?id="+dto.getId()+"&page="+pd.page;
-			}else{	// 이미 인스턴스를 만들면서 이미지가 업로드 되기 때문에 id, pw가 불일치하면 지워줘야 함
-//				if(!dto.getUpfile().equals("")) {
-				if(mr.getFilesystemName("upfile")!=null) {	// 폼에 파일이 저장되어있었다면
-					// path에서 파일을 삭제
-					new File(path+"//"+mr.getFilesystemName("upfile")).delete();
-				}
-			}
+			// 게시글 모델을 boardDAO의 write 메서드로
+			new GalleryDAO().write(dto);
 			
 			// 리다이렉트 하기위해 alert로
 			request.setAttribute("mainPage", "alert");
-			request.setAttribute("msg", msg);
-			request.setAttribute("goUrl", goUrl);
+			request.setAttribute("msg", "작성되었습니다.");
+			request.setAttribute("goUrl", "GDetail?id="+dto.getId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
