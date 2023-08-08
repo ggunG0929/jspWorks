@@ -1,4 +1,4 @@
-package ser_p;
+package ser2_p;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +16,9 @@ public class GWriteReg implements BoardService {
 	// execute 재정의
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// 실제 path를 부여
+		// 학원
+//		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
+		// 놋북
 		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
 		
 		try {
@@ -44,7 +47,7 @@ public class GWriteReg implements BoardService {
 			new GalleryDAO().write(dto);
 			
 			// 리다이렉트 하기위해 alert로
-			request.setAttribute("mainPage", "alert");
+			request.setAttribute("mainPage", "inc/alert");
 			request.setAttribute("msg", "작성되었습니다.");
 			request.setAttribute("goUrl", "GDetail?id="+dto.getId());
 		} catch(Exception e) {

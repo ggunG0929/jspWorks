@@ -48,7 +48,7 @@ public class BDeleteReg implements BoardService {
 		}
 		
 		// 리다이렉트 하기위해 alert로
-		request.setAttribute("mainPage", "alert");
+		request.setAttribute("mainPage", "inc/alert");
 		request.setAttribute("msg", msg);
 		request.setAttribute("goUrl", goUrl);
 	}

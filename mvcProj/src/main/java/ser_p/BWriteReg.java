@@ -16,7 +16,10 @@ public class BWriteReg implements BoardService {
 	// execute 재정의
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// 실제 path를 부여
-		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
+		// 학원
+//		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
+		// 놋북
+		String path = "C:\\Users\\laptop\\Desktop\\coding\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
 		
 		try {
 			// MultipartRequest: cos.jar를 통해 쓸 수 있는 클래스
@@ -45,7 +48,7 @@ public class BWriteReg implements BoardService {
 			new BoardDAO().write(dto);
 			
 			// 리다이렉트 하기위해 alert로
-			request.setAttribute("mainPage", "alert");
+			request.setAttribute("mainPage", "inc/alert");
 			request.setAttribute("msg", "작성되었습니다.");
 			request.setAttribute("goUrl", "BDetail?id="+dto.getId());
 		} catch(Exception e) {

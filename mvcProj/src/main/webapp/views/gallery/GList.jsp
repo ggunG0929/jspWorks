@@ -4,10 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	img{width: 180px;
-	}
+
 </style>
-<table border="">
+<table border="" width="100%">
 	<!-- 같은 이름의 클래스에서 넘겨받은 메인데이터 출력 -->
 	<tr align="center">
 	<%
@@ -18,7 +17,8 @@
 	%>
 		<td>
 			<a href="GDetail?id=<%=dto.getId() %>">
-				<img src="/mvcProj/up/<%=dto.getUpfile()%>" alt="">
+				<%-- <img src="/mvcProj/up/<%=dto.getUpfile()%>" alt=""><br> --%>
+				<img src="../../up/<%=dto.getUpfile()%>" alt=""><br>
 				<%=dto.getTitle() %>
 			</a>
 		</td>

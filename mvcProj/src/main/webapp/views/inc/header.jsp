@@ -6,9 +6,9 @@
 		<td colspan="4" width="900px"><h1><%=request.getAttribute("mainTitle") %></h1></td>
 	</tr>
 	<tr align="center">
-		<td><a href="/mvcProj/info">회사소개</a></td>
-		<td><a href="/mvcProj/product">제품</a></td>
-		<td><a href="/mvcProj/gallery/GList">갤러리</a></td>
-		<td><a href="/mvcProj/board/BList">게시판</a></td>
+		<td><a href="info">회사소개</a></td>
+		<td><a href="product">제품</a></td>
+		<td><a href="/gallery/GList">갤러리</a></td>
+		<td><a href="/board/BList">게시판</a></td>
 	</tr>
 </table>

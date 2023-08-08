@@ -1,4 +1,4 @@
-package ser_p;
+package ser2_p;
 
 import java.io.File;
 
@@ -48,7 +48,7 @@ public class GDeleteReg implements BoardService {
 		}
 		
 		// 리다이렉트 하기위해 alert로
-		request.setAttribute("mainPage", "alert");
+		request.setAttribute("mainPage", "inc/alert");
 		request.setAttribute("msg", msg);
 		request.setAttribute("goUrl", goUrl);
 	}

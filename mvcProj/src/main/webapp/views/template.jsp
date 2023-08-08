@@ -3,7 +3,7 @@
 <%
 	// 보드컨트롤러에서 보내온 정보 받기
 	// /board/뒤에 붙는 클라이언트의 요청.jsp 페이지
-	String mainUrl = "board/"+request.getAttribute("mainPage")+".jsp";
+	String mainUrl = request.getAttribute("mainPage")+".jsp";
 %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- table>tr*3>td> ctrl+e -->
 <table border="">
 	<tr>
 		<td><jsp:include page="inc/header.jsp" /></td>

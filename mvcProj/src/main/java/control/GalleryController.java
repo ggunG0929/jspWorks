@@ -30,12 +30,12 @@ public class GalleryController extends HttpServlet {
 			// 한글 깨지지 않게
 			request.setCharacterEncoding("UTF-8");
 			
-			request.setAttribute("mainPage", serviceStr);
+			request.setAttribute("mainPage", "gallery/"+serviceStr);
 			
 			request.setAttribute("pd", new PageData2(request));
 			
 			// 보드서비스타입의 서비스 객체(인스턴스)를 생성 = (보드서비스타입으로 형변환)ser_p패키지의 서비스str이름인 클래스 객체를 가져오고. 기본 생성자를 호출
-			BoardService service = (BoardService)Class.forName("ser_p."+serviceStr).newInstance();	// surround with try catch
+			BoardService service = (BoardService)Class.forName("ser2_p."+serviceStr).newInstance();	// surround with try catch
 			// execute: 실행하다 수행하다	// 보드서비스를 통해 execute메서드 호출, 각 클래스에서 재정의 된 execute가 실행됨
 			service.execute(request, response);
 			

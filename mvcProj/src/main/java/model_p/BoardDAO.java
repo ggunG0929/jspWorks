@@ -146,8 +146,6 @@ public class BoardDAO {
 	public void addCount(int id) {
 		// db의 cnt(조회수)를 1 올려라 id가 ?인 게시글의
 		sql = "update board set cnt = cnt+1 where id = ?";
-		// 게시글 모델 null로
-		BoardDTO dto = null;
 		try {
 			// sql문을 준비(나중에 쿼리실행할 때 사용할 예정)
 			ptmt = con.prepareStatement(sql);

@@ -32,7 +32,7 @@ public class BReplyReg implements BoardService {
 			new BoardDAO().reply(dto);
 			
 			// 리다이렉트 하기위해 alert로
-			request.setAttribute("mainPage", "alert");
+			request.setAttribute("mainPage", "inc/alert");
 			request.setAttribute("msg", "작성되었습니다.");
 			request.setAttribute("goUrl", "BDetail?id="+dto.getId()+"&page="+pd.page);
 		} catch(Exception e) {

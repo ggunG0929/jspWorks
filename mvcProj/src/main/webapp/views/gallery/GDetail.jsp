@@ -31,7 +31,8 @@
 	<tr>
 		<td>파일</td>
 		<td>
-			<img src="/mvcProj/up/<%=dto.getUpfile()%>" alt="">
+<%-- 			<img src="/mvcProj/up/<%=dto.getUpfile()%>" alt=""> --%>
+			<img src="../../up/<%=dto.getUpfile()%>" alt="">
 		</td>
 	</tr>
 	<tr>

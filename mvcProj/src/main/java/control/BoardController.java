@@ -37,7 +37,7 @@ public class BoardController extends HttpServlet {
 			
 			// 메인페이지라는 필드로 uri 중 board/ 다음을 지정해서 넘겨줌
 			// redirect가 필요해지면서 보드서비스 보다 위로 자리를 옮겨줌
-			request.setAttribute("mainPage", serviceStr);
+			request.setAttribute("mainPage", "board/"+serviceStr);
 			
 			// 페이지처리를 하면서 PageData 정보를 넘겨줌
 			request.setAttribute("pd", new PageData(request));

@@ -17,7 +17,10 @@ public class BFileDelete implements BoardService{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
+		// 학원
+//		String path = "C:\\Users\\Administrator\\git\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
+		// 놋북
+		String path = "C:\\Users\\laptop\\Desktop\\coding\\jspWorks\\mvcProj\\src\\main\\webapp\\up";
 		
 		PageData pd = (PageData)request.getAttribute("pd");
 		
